@@ -137,6 +137,17 @@
             ]
         },
         {
+            "id": "ravencoin",
+            "symbol": "RVN",
+            "name": "Ravencoin",
+            "networks":
+            [
+                {
+                    "networkId": "ravencoin/test"
+                }
+            ]
+        },
+        {
             "id": "optimistic-ethereum",
             "symbol": "ETH",
             "name": "Optimistic Ethereum",

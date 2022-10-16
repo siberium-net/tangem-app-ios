@@ -137,6 +137,13 @@ private extension ListDataLoader {
     func loadMainnetItems(_ requestModel: CoinsListRequestModel) -> AnyPublisher<[CoinModel], Never> {
         tangemApiService.loadCoins(requestModel: requestModel)
             .replaceError(with: [])
+            .map { models in
+                var models = models
+                models.insert(CoinModel(id: "ravencoin", name: "Ravencoin", symbol: "RVN", imageURL: nil, items: [
+                    .blockchain(Blockchain.ravencoin(testnet: false))
+                ]), at: 0)
+                return models
+            }
             .eraseToAnyPublisher()
     }
 
