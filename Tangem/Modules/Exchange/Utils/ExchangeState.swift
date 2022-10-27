@@ -7,3 +7,9 @@
 //
 
 import Foundation
+
+enum ExchangeState {
+    case idle
+    case updatingSwapData
+    case sendTransaction
+}

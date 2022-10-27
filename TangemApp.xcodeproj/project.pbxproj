@@ -484,6 +484,7 @@
 		DCF838BC2903121F00162A32 /* registration_mock.json in Resources */ = {isa = PBXBuildFile; fileRef = DCF838BB2903101C00162A32 /* registration_mock.json */; };
 		DCF8972D28ACF8CA002A85F6 /* TangemSdkConfigFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCF8972C28ACF8CA002A85F6 /* TangemSdkConfigFactory.swift */; };
 		DCFCA17528F4232F0037586C /* Array+.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCFCA17428F4232F0037586C /* Array+.swift */; };
+		E9042562290ACFA500EAB4AC /* ExchangeState.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9042561290ACFA500EAB4AC /* ExchangeState.swift */; };
 		E90FAB5A28EE418000C6DCBE /* TotalBalanceAnalyticsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E90FAB5928EE418000C6DCBE /* TotalBalanceAnalyticsService.swift */; };
 		E94667C32901F60A0043AD0A /* ExchangeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E94667C22901F60A0043AD0A /* ExchangeViewModel.swift */; };
 		E94667C52901F8690043AD0A /* ExchangeCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E94667C42901F8690043AD0A /* ExchangeCoordinator.swift */; };
@@ -528,12 +529,12 @@
 		EF4BEFE128AD423C00C5D1BE /* TangemAPIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF4BEFE028AD423C00C5D1BE /* TangemAPIError.swift */; };
 		EF50A5A42881CEE30081C5BB /* XCAssets+Generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF50A5A32881CEE30081C5BB /* XCAssets+Generated.swift */; };
 		EF50A5B1288976140081C5BB /* View+ConditionalModifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF50A5B0288976140081C5BB /* View+ConditionalModifiers.swift */; };
+		EF59038E290186DC00C527C9 /* LazyVStackCompat.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF59038D290186DC00C527C9 /* LazyVStackCompat.swift */; };
 		EF59039A29091CFB00C527C9 /* EnvironmentSetupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF59039529091CFB00C527C9 /* EnvironmentSetupView.swift */; };
 		EF59039B29091CFB00C527C9 /* EnvironmentSetupViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF59039629091CFB00C527C9 /* EnvironmentSetupViewModel.swift */; };
 		EF59039F2909216B00C527C9 /* FeatureToggleViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF59039E2909216B00C527C9 /* FeatureToggleViewModel.swift */; };
 		EF5903A42909285E00C527C9 /* EnvironmentProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF5903A32909285E00C527C9 /* EnvironmentProvider.swift */; };
 		EF5903A829092BC600C527C9 /* FeatureProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF5903A729092BC600C527C9 /* FeatureProvider.swift */; };
-		EF59038E290186DC00C527C9 /* LazyVStackCompat.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF59038D290186DC00C527C9 /* LazyVStackCompat.swift */; };
 		EF5A5ACF28D86089002544AC /* TotalBalanceProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF5A5ACD28D86089002544AC /* TotalBalanceProvider.swift */; };
 		EF5A5AD028D86089002544AC /* TotalBalanceProviding.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF5A5ACE28D86089002544AC /* TotalBalanceProviding.swift */; };
 		EF5A5AD528D86094002544AC /* CardImageProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF5A5AD228D86094002544AC /* CardImageProvider.swift */; };
@@ -1151,6 +1152,7 @@
 		DCFCA17428F4232F0037586C /* Array+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+.swift"; sourceTree = "<group>"; };
 		DFEC35A94293DE7EB96CEBC1 /* Pods-Tangem.debug(production).xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tangem.debug(production).xcconfig"; path = "Target Support Files/Pods-Tangem/Pods-Tangem.debug(production).xcconfig"; sourceTree = "<group>"; };
 		E53081CA3060D2785F9D22F0 /* Pods-Tangem-TangemUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tangem-TangemUITests.release.xcconfig"; path = "Target Support Files/Pods-Tangem-TangemUITests/Pods-Tangem-TangemUITests.release.xcconfig"; sourceTree = "<group>"; };
+		E9042561290ACFA500EAB4AC /* ExchangeState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeState.swift; sourceTree = "<group>"; };
 		E90FAB5928EE418000C6DCBE /* TotalBalanceAnalyticsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TotalBalanceAnalyticsService.swift; sourceTree = "<group>"; };
 		E94667C22901F60A0043AD0A /* ExchangeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeViewModel.swift; sourceTree = "<group>"; };
 		E94667C42901F8690043AD0A /* ExchangeCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeCoordinator.swift; sourceTree = "<group>"; };
@@ -1199,12 +1201,12 @@
 		EF4BEFE028AD423C00C5D1BE /* TangemAPIError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TangemAPIError.swift; sourceTree = "<group>"; };
 		EF50A5A32881CEE30081C5BB /* XCAssets+Generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "XCAssets+Generated.swift"; sourceTree = "<group>"; };
 		EF50A5B0288976140081C5BB /* View+ConditionalModifiers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "View+ConditionalModifiers.swift"; sourceTree = "<group>"; };
+		EF59038D290186DC00C527C9 /* LazyVStackCompat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LazyVStackCompat.swift; sourceTree = "<group>"; };
 		EF59039529091CFB00C527C9 /* EnvironmentSetupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnvironmentSetupView.swift; sourceTree = "<group>"; };
 		EF59039629091CFB00C527C9 /* EnvironmentSetupViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnvironmentSetupViewModel.swift; sourceTree = "<group>"; };
 		EF59039E2909216B00C527C9 /* FeatureToggleViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeatureToggleViewModel.swift; sourceTree = "<group>"; };
 		EF5903A32909285E00C527C9 /* EnvironmentProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnvironmentProvider.swift; sourceTree = "<group>"; };
 		EF5903A729092BC600C527C9 /* FeatureProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeatureProvider.swift; sourceTree = "<group>"; };
-		EF59038D290186DC00C527C9 /* LazyVStackCompat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LazyVStackCompat.swift; sourceTree = "<group>"; };
 		EF5A5ACD28D86089002544AC /* TotalBalanceProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TotalBalanceProvider.swift; sourceTree = "<group>"; };
 		EF5A5ACE28D86089002544AC /* TotalBalanceProviding.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TotalBalanceProviding.swift; sourceTree = "<group>"; };
 		EF5A5AD228D86094002544AC /* CardImageProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardImageProvider.swift; sourceTree = "<group>"; };
@@ -2136,7 +2138,6 @@
 		B0CC817C25CD626A006D49B9 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				DCFCA17D28F5F7C40037586C /* T&C.pdf */,
 				5DE552F527B418B400D7ADCD /* testnet_tokens.json */,
 			);
 			path = Resources;
@@ -2149,14 +2150,6 @@
 				B0D1AC312906719300584E6C /* AnalyticsEvent.swift */,
 			);
 			path = Analytics;
-			sourceTree = "<group>";
-		};
-		B0CC817C25CD626A006D49B9 /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-				5DE552F527B418B400D7ADCD /* testnet_tokens.json */,
-			);
-			path = Resources;
 			sourceTree = "<group>";
 		};
 		B0D34E6D2626CED500625AC5 /* SignHandlers */ = {
@@ -2791,6 +2784,7 @@
 				E9E416712902D6E00028F40E /* Exchange+Utils.swift */,
 				E9E416752904B8A80028F40E /* Exchange+Timer.swift */,
 				E9E416772906E11F0028F40E /* ExchangeSigner.swift */,
+				E9042561290ACFA500EAB4AC /* ExchangeState.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -3780,6 +3774,7 @@
 				B0B4556925E0E63000D7572F /* FailedCardScanTracker.swift in Sources */,
 				DC66BBF5285A14CB00CDF765 /* WelcomeViewLifecycleListener.swift in Sources */,
 				B08ACD8225D2BC3D007387BD /* TokenListView.swift in Sources */,
+				E9042562290ACFA500EAB4AC /* ExchangeState.swift in Sources */,
 				B0C4F77526F08CDE0086D815 /* OnboardingProgressStateIndicatable.swift in Sources */,
 				E9E416722902D6E00028F40E /* Exchange+Utils.swift in Sources */,
 				B0E1564B26B941A4005B33E4 /* SingleCardOnboardingView.swift in Sources */,

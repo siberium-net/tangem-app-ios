@@ -16,6 +16,8 @@ class ExchangeViewModel: ObservableObject {
     @Injected(\.tangemApiService) private var tangemApiService: TangemApiService
 
     @Published var items: ExchangeItems
+    @Published var state: ExchangeState = .idle
+
     @Published private var swapInformation: SwapDTO?
 
     let amountType: Amount.AmountType
