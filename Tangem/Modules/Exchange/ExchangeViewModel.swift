@@ -16,9 +16,7 @@ class ExchangeViewModel: ObservableObject {
     @Injected(\.tangemApiService) private var tangemApiService: TangemApiService
 
     @Published var items: ExchangeItems
-    @Published var state: ExchangeState = .idle
-
-    @Published private var swapInformation: SwapDTO?
+    @Published var exchangeWarning: ExchangeWarning = .empty
 
     let amountType: Amount.AmountType
     let walletModel: WalletModel
@@ -30,6 +28,7 @@ class ExchangeViewModel: ObservableObject {
 
     private let exchangeFacade: ExchangeFacade = ExchangeFacadeImpl(enableDebugMode: true)
     private let signer: ExchangeSigner = ExchangeSigner()
+    private var swapInformation: SwapDTO?
 
     private lazy var exchangeInteractor: ExchangeTxInteractor = ExchangeTxInteractor(walletModel: walletModel, card: card)
 
@@ -77,8 +76,35 @@ extension ExchangeViewModel {
             switch swapResult {
             case .success(let swapResponse):
                 swapInformation = swapResponse
+                await MainActor.run {
+                    items.toItem.amount = swapResponse.toTokenAmount
+                }
             case .failure(let error):
-                print(error.localizedDescription)
+                switch error {
+                case .parsedError(let errorInfo):
+                    guard let parsedError = errorInfo.parseError() else { return }
+                    switch parsedError {
+                    case .insufficientLiquidity:
+                        break
+                    case .cannotEstimate:
+                        break
+                    case .notHaveEnoughBalanceForGas:
+                        break
+                    case .addressesAreEqual:
+                        break
+                    case .cannotEstimateNotEnoughFee:
+                        break
+                    case .notEnoughBalance:
+                        break
+                    case .notEnoughAllowance:
+                        break
+                    }
+                case .serverError(let errorInfo):
+                    // TODO: - Something went wrong
+                    break
+                case .unknownError(let statusCode):
+                    break
+                }
             }
         }
     }
@@ -131,6 +157,17 @@ extension ExchangeViewModel {
 // MARK: - Private
 
 extension ExchangeViewModel {
+    private func bind() {
+        items
+            .fromItem
+            .$amount
+            .debounce(for: 1.0, scheduler: DispatchQueue.main)
+            .sink { [weak self] _ in
+                self?.onChangeInputAmount()
+            }
+            .store(in: &bag)
+    }
+    
     /// Spender address
     private func getSpender() async throws -> String {
         let blockchain = ExchangeBlockchain.convert(from: blockchainNetwork)

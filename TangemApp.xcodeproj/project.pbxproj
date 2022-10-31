@@ -485,6 +485,8 @@
 		DCF8972D28ACF8CA002A85F6 /* TangemSdkConfigFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCF8972C28ACF8CA002A85F6 /* TangemSdkConfigFactory.swift */; };
 		DCFCA17528F4232F0037586C /* Array+.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCFCA17428F4232F0037586C /* Array+.swift */; };
 		E9042562290ACFA500EAB4AC /* ExchangeState.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9042561290ACFA500EAB4AC /* ExchangeState.swift */; };
+		E9042564290C233B00EAB4AC /* ExchangeViewError.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9042563290C233B00EAB4AC /* ExchangeViewError.swift */; };
+		E90425A0290FE14E00EAB4AC /* ErrorDTO+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E904259F290FE14E00EAB4AC /* ErrorDTO+Extension.swift */; };
 		E90FAB5A28EE418000C6DCBE /* TotalBalanceAnalyticsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E90FAB5928EE418000C6DCBE /* TotalBalanceAnalyticsService.swift */; };
 		E94667C32901F60A0043AD0A /* ExchangeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E94667C22901F60A0043AD0A /* ExchangeViewModel.swift */; };
 		E94667C52901F8690043AD0A /* ExchangeCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E94667C42901F8690043AD0A /* ExchangeCoordinator.swift */; };
@@ -1153,6 +1155,8 @@
 		DFEC35A94293DE7EB96CEBC1 /* Pods-Tangem.debug(production).xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tangem.debug(production).xcconfig"; path = "Target Support Files/Pods-Tangem/Pods-Tangem.debug(production).xcconfig"; sourceTree = "<group>"; };
 		E53081CA3060D2785F9D22F0 /* Pods-Tangem-TangemUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tangem-TangemUITests.release.xcconfig"; path = "Target Support Files/Pods-Tangem-TangemUITests/Pods-Tangem-TangemUITests.release.xcconfig"; sourceTree = "<group>"; };
 		E9042561290ACFA500EAB4AC /* ExchangeState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeState.swift; sourceTree = "<group>"; };
+		E9042563290C233B00EAB4AC /* ExchangeViewError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeViewError.swift; sourceTree = "<group>"; };
+		E904259F290FE14E00EAB4AC /* ErrorDTO+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ErrorDTO+Extension.swift"; sourceTree = "<group>"; };
 		E90FAB5928EE418000C6DCBE /* TotalBalanceAnalyticsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TotalBalanceAnalyticsService.swift; sourceTree = "<group>"; };
 		E94667C22901F60A0043AD0A /* ExchangeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeViewModel.swift; sourceTree = "<group>"; };
 		E94667C42901F8690043AD0A /* ExchangeCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeCoordinator.swift; sourceTree = "<group>"; };
@@ -2763,9 +2767,27 @@
 			path = TangemApiService;
 			sourceTree = "<group>";
 		};
+		E9042565290C234100EAB4AC /* Errors */ = {
+			isa = PBXGroup;
+			children = (
+				E9042563290C233B00EAB4AC /* ExchangeViewError.swift */,
+			);
+			path = Errors;
+			sourceTree = "<group>";
+		};
+		E904259E290FE13100EAB4AC /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				E904259F290FE14E00EAB4AC /* ErrorDTO+Extension.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		E94667C12901F5C90043AD0A /* Exchange */ = {
 			isa = PBXGroup;
 			children = (
+				E904259E290FE13100EAB4AC /* Extensions */,
+				E9042565290C234100EAB4AC /* Errors */,
 				E94D87F6290968B700F82926 /* Interactor */,
 				E94667CD2902D6A80043AD0A /* Utils */,
 				E94667C22901F60A0043AD0A /* ExchangeViewModel.swift */,
@@ -3435,6 +3457,7 @@
 				5DF612A424E6E3E2001BF301 /* AddressDetailsView.swift in Sources */,
 				B020A51926F1DDA700D38596 /* OnboardingViewModel.swift in Sources */,
 				B0C4F78126F0CCF70086D815 /* OnboardingStep.swift in Sources */,
+				E9042564290C233B00EAB4AC /* ExchangeViewError.swift in Sources */,
 				5D17EC7826947ED9002782DE /* SignAndReadTask.swift in Sources */,
 				5D09380A25E6AEB10049B8F0 /* BalanceAddressView.swift in Sources */,
 				B09BB883259A09CE00B92000 /* WarningEvent+.swift in Sources */,
@@ -3799,6 +3822,7 @@
 				EF7B9CEF286C6BD7004C33A9 /* CardSettingsView.swift in Sources */,
 				DC7127B12897ECDF00F60F71 /* LegacyConfig.swift in Sources */,
 				B020A51726F1DD9E00D38596 /* OnboardingTopupViewModel.swift in Sources */,
+				E90425A0290FE14E00EAB4AC /* ErrorDTO+Extension.swift in Sources */,
 				5D9DCB0C255199AA0059799C /* SecurityModeViewModel.swift in Sources */,
 				DA4C84CE27DA2D6D00B76F91 /* StoriesConstants.swift in Sources */,
 				EF0F99B328902902008B01DF /* DefaultFooterView.swift in Sources */,
