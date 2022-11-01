@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import Exchanger
+import ExchangeSdk
 import BlockchainSdk
 
 extension ExchangeBlockchain {
@@ -15,8 +15,8 @@ extension ExchangeBlockchain {
         switch blockchainNetwork.blockchain {
         case .ethereum:
             return .ethereum
-        case .binance:
-            return .BSC
+        case .bsc:
+            return .bsc
         case .polygon:
             return .polygon
         case .avalanche:
@@ -28,7 +28,7 @@ extension ExchangeBlockchain {
         case .optimism:
             return .optimism
         case .gnosis:
-            return .gnosisChain
+            return .gnosis
         default:
             fatalError("Unknown blockchain")
         }

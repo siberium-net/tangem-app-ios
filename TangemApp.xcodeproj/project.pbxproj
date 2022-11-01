@@ -339,6 +339,7 @@
 		DA23788B27B2488D009795A8 /* ShopifyShop.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA23788A27B2488D009795A8 /* ShopifyShop.swift */; };
 		DA23789027B250EB009795A8 /* ShopViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA23788F27B250EB009795A8 /* ShopViewModel.swift */; };
 		DA23789227B250F6009795A8 /* ShopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA23789127B250F6009795A8 /* ShopView.swift */; };
+		DA28D57D290AAE2000F0C335 /* ScrollView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA28D57C290AAE2000F0C335 /* ScrollView+.swift */; };
 		DA2D04D327BB9B07006F1E69 /* ShopOrderProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA2D04D227BB9B07006F1E69 /* ShopOrderProgressView.swift */; };
 		DA4C84CD27DA2D6D00B76F91 /* AnimatableModifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4C84CB27DA2D6D00B76F91 /* AnimatableModifiers.swift */; };
 		DA4C84CE27DA2D6D00B76F91 /* StoriesConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4C84CC27DA2D6D00B76F91 /* StoriesConstants.swift */; };
@@ -496,8 +497,7 @@
 		E94D87F82909762F00F82926 /* ExchangeInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = E94D87F72909762F00F82926 /* ExchangeInteractor.swift */; };
 		E9E416722902D6E00028F40E /* Exchange+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9E416712902D6E00028F40E /* Exchange+Utils.swift */; };
 		E9E4167429033F300028F40E /* ExchangeItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9E4167329033F300028F40E /* ExchangeItems.swift */; };
-		E9E416762904B8A80028F40E /* Exchange+Timer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9E416752904B8A80028F40E /* Exchange+Timer.swift */; };
-		E9E416782906E11F0028F40E /* ExchangeSigner.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9E416772906E11F0028F40E /* ExchangeSigner.swift */; };
+		E9E416762904B8A80028F40E /* ExchangeTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9E416752904B8A80028F40E /* ExchangeTimer.swift */; };
 		EF07F3AD289D43580065549C /* List+.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF07F3AC289D43580065549C /* List+.swift */; };
 		EF08A0EF283D1914008BD923 /* Moya+.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF08A0EE283D1914008BD923 /* Moya+.swift */; };
 		EF08A0F1283D2382008BD923 /* CoinsListRequestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF08A0F0283D2382008BD923 /* CoinsListRequestModel.swift */; };
@@ -609,16 +609,6 @@
 			files = (
 			);
 			name = "Embed App Extensions";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		EFCC66C328AA2FDC00EC7757 /* Embed App Clips */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "$(CONTENTS_FOLDER_PATH)/AppClips";
-			dstSubfolderSpec = 16;
-			files = (
-			);
-			name = "Embed App Clips";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
@@ -1005,6 +995,7 @@
 		DA23788A27B2488D009795A8 /* ShopifyShop.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShopifyShop.swift; sourceTree = "<group>"; };
 		DA23788F27B250EB009795A8 /* ShopViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopViewModel.swift; sourceTree = "<group>"; };
 		DA23789127B250F6009795A8 /* ShopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopView.swift; sourceTree = "<group>"; };
+		DA28D57C290AAE2000F0C335 /* ScrollView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ScrollView+.swift"; sourceTree = "<group>"; };
 		DA2D04D227BB9B07006F1E69 /* ShopOrderProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopOrderProgressView.swift; sourceTree = "<group>"; };
 		DA4839122E820A95F4D57EBE /* Pods-TangemTests.debug(alpha).xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TangemTests.debug(alpha).xcconfig"; path = "Target Support Files/Pods-TangemTests/Pods-TangemTests.debug(alpha).xcconfig"; sourceTree = "<group>"; };
 		DA4C84CB27DA2D6D00B76F91 /* AnimatableModifiers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimatableModifiers.swift; sourceTree = "<group>"; };
@@ -1166,8 +1157,7 @@
 		E94D87F72909762F00F82926 /* ExchangeInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeInteractor.swift; sourceTree = "<group>"; };
 		E9E416712902D6E00028F40E /* Exchange+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Exchange+Utils.swift"; sourceTree = "<group>"; };
 		E9E4167329033F300028F40E /* ExchangeItems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeItems.swift; sourceTree = "<group>"; };
-		E9E416752904B8A80028F40E /* Exchange+Timer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Exchange+Timer.swift"; sourceTree = "<group>"; };
-		E9E416772906E11F0028F40E /* ExchangeSigner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeSigner.swift; sourceTree = "<group>"; };
+		E9E416752904B8A80028F40E /* ExchangeTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeTimer.swift; sourceTree = "<group>"; };
 		EF07F3AC289D43580065549C /* List+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "List+.swift"; sourceTree = "<group>"; };
 		EF08A0EE283D1914008BD923 /* Moya+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Moya+.swift"; sourceTree = "<group>"; };
 		EF08A0F0283D2382008BD923 /* CoinsListRequestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinsListRequestModel.swift; sourceTree = "<group>"; };
@@ -1653,6 +1643,7 @@
 				EF98BDF028CF89AF00D51719 /* Collection+.swift */,
 				EF9F6F3C28D486B100D6B190 /* Publishers+CombineLatestMany.swift */,
 				DCFCA17428F4232F0037586C /* Array+.swift */,
+				DA28D57C290AAE2000F0C335 /* ScrollView+.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -2767,27 +2758,9 @@
 			path = TangemApiService;
 			sourceTree = "<group>";
 		};
-		E9042565290C234100EAB4AC /* Errors */ = {
-			isa = PBXGroup;
-			children = (
-				E9042563290C233B00EAB4AC /* ExchangeViewError.swift */,
-			);
-			path = Errors;
-			sourceTree = "<group>";
-		};
-		E904259E290FE13100EAB4AC /* Extensions */ = {
-			isa = PBXGroup;
-			children = (
-				E904259F290FE14E00EAB4AC /* ExchangeInchError+Extension.swift */,
-			);
-			path = Extensions;
-			sourceTree = "<group>";
-		};
 		E94667C12901F5C90043AD0A /* Exchange */ = {
 			isa = PBXGroup;
 			children = (
-				E904259E290FE13100EAB4AC /* Extensions */,
-				E9042565290C234100EAB4AC /* Errors */,
 				E94D87F6290968B700F82926 /* Interactor */,
 				E94667CD2902D6A80043AD0A /* Utils */,
 				E94667C22901F60A0043AD0A /* ExchangeViewModel.swift */,
@@ -2804,9 +2777,7 @@
 			isa = PBXGroup;
 			children = (
 				E9E416712902D6E00028F40E /* Exchange+Utils.swift */,
-				E9E416752904B8A80028F40E /* Exchange+Timer.swift */,
-				E9E416772906E11F0028F40E /* ExchangeSigner.swift */,
-				E9042561290ACFA500EAB4AC /* ExchangeState.swift */,
+				E9E416752904B8A80028F40E /* ExchangeTimer.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -3072,7 +3043,7 @@
 				5D3F77C024BF56D800E8695B /* Resources */,
 				78515DF22ED176E83FF382BF /* [CP] Embed Pods Frameworks */,
 				B066823E26564ADB00CB86CF /* Embed App Extensions */,
-				EFCC66C328AA2FDC00EC7757 /* Embed App Clips */,
+				EFA18E73290FBA1B00CF1AE4 /* Run SwiftFormat */,
 			);
 			buildRules = (
 			);
@@ -3323,6 +3294,24 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		EFA18E73290FBA1B00CF1AE4 /* Run SwiftFormat */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Run SwiftFormat";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# check if directory exists then add it to path\nif [ -d ~/.mint/bin ]; then\n    echo \"Adding ~/.mint/bin to PATH\"\n    export PATH=~/.mint/bin:$PATH\nelse\n  echo \"~/.mint/bin folder is missing\"\nfi\n\n# check if swiftgen tool can be found.\nif [ $(command -v swiftformat) ]; then\n    if [ ${ENABLE_PREVIEWS} == \"NO\" ]; then \n        echo \"🚀 Running SwiftFormat\"\n        swiftformat . --config .swiftformat\n    fi\nelse\n  echo \"SwiftFormat tool is missing\"\n  exit 1\nfi\n";
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -3530,6 +3519,7 @@
 				B0C4F77326F08CB50086D815 /* OnboardingCardFrameCalculator.swift in Sources */,
 				5DD24B41274FAC2400BF80BE /* WalletManagerFactoryProvider.swift in Sources */,
 				B0AA865426DC90FF00287F80 /* WelcomeViewModel.swift in Sources */,
+				DA28D57D290AAE2000F0C335 /* ScrollView+.swift in Sources */,
 				EF7BD11028B8B321001B2D59 /* CommonUserWalletModel.swift in Sources */,
 				5D69E0E325016A10005CFFF4 /* TapSwitchTogglColoredToggleStyleeStyle.swift in Sources */,
 				DC7127AD2897ECA100F60F71 /* TwinConfig.swift in Sources */,
@@ -3651,7 +3641,7 @@
 				5D49035227BE9D550072C642 /* Data+.swift in Sources */,
 				DAC53CFE27BE63830027147D /* MeetTangemStoryPage.swift in Sources */,
 				B0BA7BC726C4F9A300D7066F /* OnboardingCircleButton.swift in Sources */,
-				E9E416762904B8A80028F40E /* Exchange+Timer.swift in Sources */,
+				E9E416762904B8A80028F40E /* ExchangeTimer.swift in Sources */,
 				B04BA23126F07ECE0036784C /* OnboardingTextButtonView.swift in Sources */,
 				DC74BC2F28EF060600B49850 /* UserWalletId.swift in Sources */,
 				EF4BEF8128AB953E00C5D1BE /* CommonUserTokenListManager.swift in Sources */,

@@ -14,13 +14,10 @@ class WalletModel: ObservableObject, Identifiable {
     @Injected(\.tangemApiService) private var tangemApiService: TangemApiService
 
     lazy var walletDidChange: AnyPublisher<WalletModel.State, Never> = {
-        Publishers.CombineLatest(
-            $state.dropFirst().removeDuplicates(),
-            $rates.dropFirst().removeDuplicates()
-        )
-        .map { $0.0 } // Move on latest value state
-        .share()
-        .eraseToAnyPublisher()
+        Publishers.CombineLatest($state.dropFirst(), $rates.dropFirst())
+            .map { $0.0 } // Move on latest value state
+            .share()
+            .eraseToAnyPublisher()
     }()
 
     @Published var state: State = .created
@@ -422,7 +419,8 @@ extension WalletModel {
     }
 
     func getFiatBalance(for type: Amount.AmountType) -> String {
-        return getFiatFormatted(for: wallet.amounts[type]) ?? "–"
+        let amount = wallet.amounts[type] ?? Amount(with: wallet.blockchain, type: type, value: .zero)
+        return getFiatFormatted(for: amount) ?? "–"
     }
 
     func isCustom(_ amountType: Amount.AmountType) -> Bool {
