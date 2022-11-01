@@ -85,7 +85,7 @@ extension ExchangeViewModel {
                 swapInformation = swapResponse
 
                 await MainActor.run {
-                    items.toItem.amount = swapResponse.toTokenAmount
+                    items.destinationItem.amount = swapResponse.toTokenAmount
                 }
             case .failure(let error):
                 switch error {
@@ -101,10 +101,8 @@ extension ExchangeViewModel {
                     case .notEnoughBalance:
                         exchangeWarning = .notEnoughFunds
                     }
-                case .serverError(let errorInfo):
+                case .serverError, .unknownError, .decodeError:
                     // TODO: - Something went wrong
-                    break
-                case .unknownError(let statusCode):
                     break
                 }
             }
@@ -161,7 +159,7 @@ extension ExchangeViewModel {
 extension ExchangeViewModel {
     private func bind() {
         items
-            .fromItem
+            .sourceItem
             .$amount
             .debounce(for: 1.0, scheduler: DispatchQueue.main)
             .sink { [weak self] _ in
@@ -194,17 +192,6 @@ extension ExchangeViewModel {
                 }
             } receiveValue: { [weak self] coinModels in
                 self?.prefetchedAvailableCoins = coinModels
-            }
-            .store(in: &bag)
-    }
-
-    private func bind() {
-        items
-            .sourceItem
-            .$amount
-            .debounce(for: 1.0, scheduler: DispatchQueue.main)
-            .sink { [weak self] _ in
-                self?.onChangeInputAmount()
             }
             .store(in: &bag)
     }

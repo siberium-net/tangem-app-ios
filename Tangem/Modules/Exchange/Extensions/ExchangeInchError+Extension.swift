@@ -7,9 +7,9 @@
 //
 
 import Foundation
-import Exchanger
+import ExchangeSdk
 
-extension ErrorDTO {
+extension InchError {
     enum Error {
         case insufficientLiquidity
         case cannotEstimate
@@ -17,10 +17,10 @@ extension ErrorDTO {
         case cannotEstimateNotEnoughFee
         case notEnoughBalance
     }
-    
-    func parseError() -> ErrorDTO.Error? {
+
+    func parseError() -> InchError.Error? {
         let descriptionError = self.description.lowercased()
-        
+
         switch descriptionError {
         case let description where description.contains("insufficient liquidity"):
             return .insufficientLiquidity

@@ -485,9 +485,6 @@
 		DCF838BC2903121F00162A32 /* registration_mock.json in Resources */ = {isa = PBXBuildFile; fileRef = DCF838BB2903101C00162A32 /* registration_mock.json */; };
 		DCF8972D28ACF8CA002A85F6 /* TangemSdkConfigFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCF8972C28ACF8CA002A85F6 /* TangemSdkConfigFactory.swift */; };
 		DCFCA17528F4232F0037586C /* Array+.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCFCA17428F4232F0037586C /* Array+.swift */; };
-		E9042562290ACFA500EAB4AC /* ExchangeState.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9042561290ACFA500EAB4AC /* ExchangeState.swift */; };
-		E9042564290C233B00EAB4AC /* ExchangeViewError.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9042563290C233B00EAB4AC /* ExchangeViewError.swift */; };
-		E90425A0290FE14E00EAB4AC /* ExchangeInchError+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E904259F290FE14E00EAB4AC /* ExchangeInchError+Extension.swift */; };
 		E90FAB5A28EE418000C6DCBE /* TotalBalanceAnalyticsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E90FAB5928EE418000C6DCBE /* TotalBalanceAnalyticsService.swift */; };
 		E94667C32901F60A0043AD0A /* ExchangeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E94667C22901F60A0043AD0A /* ExchangeViewModel.swift */; };
 		E94667C52901F8690043AD0A /* ExchangeCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E94667C42901F8690043AD0A /* ExchangeCoordinator.swift */; };
@@ -495,6 +492,8 @@
 		E94667C92901FADB0043AD0A /* ExchangeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E94667C82901FADB0043AD0A /* ExchangeView.swift */; };
 		E94667CC2902BC260043AD0A /* ExchangeItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = E94667CB2902BC260043AD0A /* ExchangeItem.swift */; };
 		E94D87F82909762F00F82926 /* ExchangeInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = E94D87F72909762F00F82926 /* ExchangeInteractor.swift */; };
+		E98BD5DB2911D1A800B8FD91 /* ExchangeWarning.swift in Sources */ = {isa = PBXBuildFile; fileRef = E98BD5DA2911D1A800B8FD91 /* ExchangeWarning.swift */; };
+		E98BD5E62911D7BD00B8FD91 /* ExchangeInchError+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E98BD5E52911D7BD00B8FD91 /* ExchangeInchError+Extension.swift */; };
 		E9E416722902D6E00028F40E /* Exchange+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9E416712902D6E00028F40E /* Exchange+Utils.swift */; };
 		E9E4167429033F300028F40E /* ExchangeItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9E4167329033F300028F40E /* ExchangeItems.swift */; };
 		E9E416762904B8A80028F40E /* ExchangeTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9E416752904B8A80028F40E /* ExchangeTimer.swift */; };
@@ -1145,9 +1144,6 @@
 		DCFCA17428F4232F0037586C /* Array+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+.swift"; sourceTree = "<group>"; };
 		DFEC35A94293DE7EB96CEBC1 /* Pods-Tangem.debug(production).xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tangem.debug(production).xcconfig"; path = "Target Support Files/Pods-Tangem/Pods-Tangem.debug(production).xcconfig"; sourceTree = "<group>"; };
 		E53081CA3060D2785F9D22F0 /* Pods-Tangem-TangemUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tangem-TangemUITests.release.xcconfig"; path = "Target Support Files/Pods-Tangem-TangemUITests/Pods-Tangem-TangemUITests.release.xcconfig"; sourceTree = "<group>"; };
-		E9042561290ACFA500EAB4AC /* ExchangeState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeState.swift; sourceTree = "<group>"; };
-		E9042563290C233B00EAB4AC /* ExchangeViewError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeViewError.swift; sourceTree = "<group>"; };
-		E904259F290FE14E00EAB4AC /* ExchangeInchError+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ExchangeInchError+Extension.swift"; sourceTree = "<group>"; };
 		E90FAB5928EE418000C6DCBE /* TotalBalanceAnalyticsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TotalBalanceAnalyticsService.swift; sourceTree = "<group>"; };
 		E94667C22901F60A0043AD0A /* ExchangeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeViewModel.swift; sourceTree = "<group>"; };
 		E94667C42901F8690043AD0A /* ExchangeCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeCoordinator.swift; sourceTree = "<group>"; };
@@ -1155,6 +1151,8 @@
 		E94667C82901FADB0043AD0A /* ExchangeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeView.swift; sourceTree = "<group>"; };
 		E94667CB2902BC260043AD0A /* ExchangeItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeItem.swift; sourceTree = "<group>"; };
 		E94D87F72909762F00F82926 /* ExchangeInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeInteractor.swift; sourceTree = "<group>"; };
+		E98BD5DA2911D1A800B8FD91 /* ExchangeWarning.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeWarning.swift; sourceTree = "<group>"; };
+		E98BD5E52911D7BD00B8FD91 /* ExchangeInchError+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ExchangeInchError+Extension.swift"; sourceTree = "<group>"; };
 		E9E416712902D6E00028F40E /* Exchange+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Exchange+Utils.swift"; sourceTree = "<group>"; };
 		E9E4167329033F300028F40E /* ExchangeItems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeItems.swift; sourceTree = "<group>"; };
 		E9E416752904B8A80028F40E /* ExchangeTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeTimer.swift; sourceTree = "<group>"; };
@@ -2761,6 +2759,7 @@
 		E94667C12901F5C90043AD0A /* Exchange */ = {
 			isa = PBXGroup;
 			children = (
+				E98BD5E42911D79500B8FD91 /* Extensions */,
 				E94D87F6290968B700F82926 /* Interactor */,
 				E94667CD2902D6A80043AD0A /* Utils */,
 				E94667C22901F60A0043AD0A /* ExchangeViewModel.swift */,
@@ -2769,6 +2768,7 @@
 				E94667C82901FADB0043AD0A /* ExchangeView.swift */,
 				E94667CB2902BC260043AD0A /* ExchangeItem.swift */,
 				E9E4167329033F300028F40E /* ExchangeItems.swift */,
+				E98BD5DA2911D1A800B8FD91 /* ExchangeWarning.swift */,
 			);
 			path = Exchange;
 			sourceTree = "<group>";
@@ -2788,6 +2788,14 @@
 				E94D87F72909762F00F82926 /* ExchangeInteractor.swift */,
 			);
 			path = Interactor;
+			sourceTree = "<group>";
+		};
+		E98BD5E42911D79500B8FD91 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				E98BD5E52911D7BD00B8FD91 /* ExchangeInchError+Extension.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		EF08A0ED283D1905008BD923 /* Extensions */ = {
@@ -3367,7 +3375,6 @@
 				5D06E040250A5D54004218D0 /* NSRegualrExpression+.swift in Sources */,
 				EF0F99B228902902008B01DF /* DefaultToggleRowView.swift in Sources */,
 				5D84DBED270E26B90013A813 /* WelcomeBackgroundView.swift in Sources */,
-				E9E416782906E11F0028F40E /* ExchangeSigner.swift in Sources */,
 				B0C171CE264C173400E4BA5C /* CameraAccessDeniedModifier.swift in Sources */,
 				EFB4C1322837C51700E991C1 /* TextHint.swift in Sources */,
 				DC66BC12285C433800CDF765 /* AddCustomTokenRoutable.swift in Sources */,
@@ -3446,7 +3453,6 @@
 				5DF612A424E6E3E2001BF301 /* AddressDetailsView.swift in Sources */,
 				B020A51926F1DDA700D38596 /* OnboardingViewModel.swift in Sources */,
 				B0C4F78126F0CCF70086D815 /* OnboardingStep.swift in Sources */,
-				E9042564290C233B00EAB4AC /* ExchangeViewError.swift in Sources */,
 				5D17EC7826947ED9002782DE /* SignAndReadTask.swift in Sources */,
 				5D09380A25E6AEB10049B8F0 /* BalanceAddressView.swift in Sources */,
 				B09BB883259A09CE00B92000 /* WarningEvent+.swift in Sources */,
@@ -3455,6 +3461,7 @@
 				DC5E32CF28EEAC3200D6096A /* SaltPayUtil.swift in Sources */,
 				DC295B4C2861D7CF006CB7B6 /* WalletConnectCoordinator.swift in Sources */,
 				DC0A5801282500460031BECC /* SellCryptoRequest.swift in Sources */,
+				E98BD5E62911D7BD00B8FD91 /* ExchangeInchError+Extension.swift in Sources */,
 				5D09381425E6CB2D0049B8F0 /* HorizontalButtonStack.swift in Sources */,
 				DA5970EC27FC1C1B0050387C /* TangemApiTarget.swift in Sources */,
 				DC0A5818282526E30031BECC /* RateAppService.swift in Sources */,
@@ -3787,7 +3794,6 @@
 				B0B4556925E0E63000D7572F /* FailedCardScanTracker.swift in Sources */,
 				DC66BBF5285A14CB00CDF765 /* WelcomeViewLifecycleListener.swift in Sources */,
 				B08ACD8225D2BC3D007387BD /* TokenListView.swift in Sources */,
-				E9042562290ACFA500EAB4AC /* ExchangeState.swift in Sources */,
 				B0C4F77526F08CDE0086D815 /* OnboardingProgressStateIndicatable.swift in Sources */,
 				E9E416722902D6E00028F40E /* Exchange+Utils.swift in Sources */,
 				B0E1564B26B941A4005B33E4 /* SingleCardOnboardingView.swift in Sources */,
@@ -3809,10 +3815,10 @@
 				B0541DBE26FB30060043893E /* WalletOnboardingViewModel.swift in Sources */,
 				5DFCCB7824C389740014A293 /* CardViewModel.swift in Sources */,
 				EF4B41BD28644982003911F6 /* SkeletonView.swift in Sources */,
+				E98BD5DB2911D1A800B8FD91 /* ExchangeWarning.swift in Sources */,
 				EF7B9CEF286C6BD7004C33A9 /* CardSettingsView.swift in Sources */,
 				DC7127B12897ECDF00F60F71 /* LegacyConfig.swift in Sources */,
 				B020A51726F1DD9E00D38596 /* OnboardingTopupViewModel.swift in Sources */,
-				E90425A0290FE14E00EAB4AC /* ExchangeInchError+Extension.swift in Sources */,
 				5D9DCB0C255199AA0059799C /* SecurityModeViewModel.swift in Sources */,
 				DA4C84CE27DA2D6D00B76F91 /* StoriesConstants.swift in Sources */,
 				EF0F99B328902902008B01DF /* DefaultFooterView.swift in Sources */,
