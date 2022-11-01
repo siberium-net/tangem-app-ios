@@ -1,5 +1,5 @@
 //
-//  ErrorDTO+Extension.swift
+//  ExchangeInchError+Extension.swift
 //  Tangem
 //
 //  Created by Pavel Grechikhin on 31.10.2022.
@@ -14,10 +14,8 @@ extension ErrorDTO {
         case insufficientLiquidity
         case cannotEstimate
         case notHaveEnoughBalanceForGas
-        case addressesAreEqual
         case cannotEstimateNotEnoughFee
         case notEnoughBalance
-        case notEnoughAllowance
     }
     
     func parseError() -> ErrorDTO.Error? {
@@ -30,14 +28,10 @@ extension ErrorDTO {
             return .cannotEstimate
         case let description where description.contains("you may not have enough balance for gas fee"):
             return .notHaveEnoughBalanceForGas
-        case let description where description.contains("fromtokenaddress cannot be equals to totokenaddress"):
-            return .addressesAreEqual
         case let description where description.contains("cannot estimate. don't forget about miner fee"):
             return .cannotEstimateNotEnoughFee
         case let description where description.contains("not enough balance"):
             return .notEnoughBalance
-        case let description where description.contains("not enough allowance"):
-            return .notEnoughAllowance
         default:
             return nil
         }

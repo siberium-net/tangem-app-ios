@@ -486,7 +486,7 @@
 		DCFCA17528F4232F0037586C /* Array+.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCFCA17428F4232F0037586C /* Array+.swift */; };
 		E9042562290ACFA500EAB4AC /* ExchangeState.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9042561290ACFA500EAB4AC /* ExchangeState.swift */; };
 		E9042564290C233B00EAB4AC /* ExchangeViewError.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9042563290C233B00EAB4AC /* ExchangeViewError.swift */; };
-		E90425A0290FE14E00EAB4AC /* ErrorDTO+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E904259F290FE14E00EAB4AC /* ErrorDTO+Extension.swift */; };
+		E90425A0290FE14E00EAB4AC /* ExchangeInchError+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E904259F290FE14E00EAB4AC /* ExchangeInchError+Extension.swift */; };
 		E90FAB5A28EE418000C6DCBE /* TotalBalanceAnalyticsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E90FAB5928EE418000C6DCBE /* TotalBalanceAnalyticsService.swift */; };
 		E94667C32901F60A0043AD0A /* ExchangeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E94667C22901F60A0043AD0A /* ExchangeViewModel.swift */; };
 		E94667C52901F8690043AD0A /* ExchangeCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E94667C42901F8690043AD0A /* ExchangeCoordinator.swift */; };
@@ -1156,7 +1156,7 @@
 		E53081CA3060D2785F9D22F0 /* Pods-Tangem-TangemUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tangem-TangemUITests.release.xcconfig"; path = "Target Support Files/Pods-Tangem-TangemUITests/Pods-Tangem-TangemUITests.release.xcconfig"; sourceTree = "<group>"; };
 		E9042561290ACFA500EAB4AC /* ExchangeState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeState.swift; sourceTree = "<group>"; };
 		E9042563290C233B00EAB4AC /* ExchangeViewError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeViewError.swift; sourceTree = "<group>"; };
-		E904259F290FE14E00EAB4AC /* ErrorDTO+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ErrorDTO+Extension.swift"; sourceTree = "<group>"; };
+		E904259F290FE14E00EAB4AC /* ExchangeInchError+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ExchangeInchError+Extension.swift"; sourceTree = "<group>"; };
 		E90FAB5928EE418000C6DCBE /* TotalBalanceAnalyticsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TotalBalanceAnalyticsService.swift; sourceTree = "<group>"; };
 		E94667C22901F60A0043AD0A /* ExchangeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeViewModel.swift; sourceTree = "<group>"; };
 		E94667C42901F8690043AD0A /* ExchangeCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeCoordinator.swift; sourceTree = "<group>"; };
@@ -2778,7 +2778,7 @@
 		E904259E290FE13100EAB4AC /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				E904259F290FE14E00EAB4AC /* ErrorDTO+Extension.swift */,
+				E904259F290FE14E00EAB4AC /* ExchangeInchError+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -3822,7 +3822,7 @@
 				EF7B9CEF286C6BD7004C33A9 /* CardSettingsView.swift in Sources */,
 				DC7127B12897ECDF00F60F71 /* LegacyConfig.swift in Sources */,
 				B020A51726F1DD9E00D38596 /* OnboardingTopupViewModel.swift in Sources */,
-				E90425A0290FE14E00EAB4AC /* ErrorDTO+Extension.swift in Sources */,
+				E90425A0290FE14E00EAB4AC /* ExchangeInchError+Extension.swift in Sources */,
 				5D9DCB0C255199AA0059799C /* SecurityModeViewModel.swift in Sources */,
 				DA4C84CE27DA2D6D00B76F91 /* StoriesConstants.swift in Sources */,
 				EF0F99B328902902008B01DF /* DefaultFooterView.swift in Sources */,

@@ -84,20 +84,14 @@ extension ExchangeViewModel {
                 case .parsedError(let errorInfo):
                     guard let parsedError = errorInfo.parseError() else { return }
                     switch parsedError {
-                    case .insufficientLiquidity:
-                        break
-                    case .cannotEstimate:
-                        break
+                    case .insufficientLiquidity, .cannotEstimate:
+                        exchangeWarning = .highPriceImpact
                     case .notHaveEnoughBalanceForGas:
-                        break
-                    case .addressesAreEqual:
-                        break
+                        exchangeWarning = .notEnoungFundsForFee
                     case .cannotEstimateNotEnoughFee:
-                        break
+                        exchangeWarning = .notEnoungFundsForFee
                     case .notEnoughBalance:
-                        break
-                    case .notEnoughAllowance:
-                        break
+                        exchangeWarning = .notEnoughFunds
                     }
                 case .serverError(let errorInfo):
                     // TODO: - Something went wrong
