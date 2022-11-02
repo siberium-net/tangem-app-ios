@@ -15,10 +15,10 @@ class ExchangeViewModel: ObservableObject {
     @Injected(\.tangemApiService) private var tangemApiService: TangemApiService
 
     @Published var items: ExchangeItems
-    @Published private var swapInformation: SwapData?
     @Published var exchangeWarning: ExchangeWarning = .empty
+    @Published private var swapData: SwapData?
 
-    let amountType: Amount.AmountType
+    let amount: Amount
     let walletModel: WalletModel
     let card: CardViewModel
     let blockchainNetwork: BlockchainNetwork
@@ -34,23 +34,23 @@ class ExchangeViewModel: ObservableObject {
     }
 
     init(
-        amountType: Amount.AmountType,
+        amount: Amount,
         walletModel: WalletModel,
         cardViewModel: CardViewModel,
         blockchainNetwork: BlockchainNetwork
     ) {
-        self.amountType = amountType
+        self.amount = amount
         self.walletModel = walletModel
         self.card = cardViewModel
         self.blockchainNetwork = blockchainNetwork
 
         let fromItem = ExchangeItem(isMainToken: true,
-                                    amountType: amountType,
+                                    amount: amount,
                                     blockchainNetwork: blockchainNetwork,
                                     exchangeService: exchangeService)
 
         let toItem = ExchangeItem(isMainToken: false,
-                                  amountType: amountType,
+                                  amount: amount,
                                   blockchainNetwork: blockchainNetwork,
                                   exchangeService: exchangeService)
 
@@ -74,19 +74,19 @@ extension ExchangeViewModel {
         Task {
             let swapParameters = SwapParameters(fromTokenAddress: items.sourceItem.tokenAddress,
                                                 toTokenAddress: items.destinationItem.tokenAddress,
-                                                amount: items.sourceItem.amount,
+                                                amount: items.sourceItem.amountText,
                                                 fromAddress: walletModel.wallet.address,
                                                 slippage: 1)
 
-            let swapResult = await exchangeService.swap(blockchain: ExchangeBlockchain.convert(from: blockchainNetwork), parameters: swapParameters)
+            let swapResult = await exchangeService.swap(blockchain: ExchangeBlockchain.convert(from: blockchainNetwork),
+                                                        parameters: swapParameters)
 
             switch swapResult {
             case .success(let swapResponse):
-                swapInformation = swapResponse
-
                 await MainActor.run {
                     items.destinationItem.amount = swapResponse.toTokenAmount
                 }
+                swapData = swapResponse
             case .failure(let error):
                 switch error {
                 case .parsedError(let errorInfo):
@@ -111,10 +111,10 @@ extension ExchangeViewModel {
 
     /// Sign and send swap transaction
     func onSwap() {
-        guard let swapInformation else { return }
+        guard let swapData else { return }
 
         exchangeInteractor
-            .sendSwapTransaction(swapData: swapInformation)
+            .sendSwapTransaction(swapData: swapData)
             .sink(receiveCompletion: { completion in
                 switch completion {
                 case .failure(let error):
@@ -147,7 +147,8 @@ extension ExchangeViewModel {
                     } receiveValue: { [weak self] _ in
                         guard let self else { return }
                         // TODO: -
-                    }.store(in: &bag)
+                    }
+                    .store(in: &bag)
             } catch {
                 print(error.localizedDescription)
             }
@@ -183,7 +184,7 @@ extension ExchangeViewModel {
 
     private func preloadAvailableTokens() {
         tangemApiService
-            .loadCoins(requestModel: .init(networkIds: [blockchainNetwork.blockchain.networkId], exchange: true))
+            .loadCoins(requestModel: .init(networkIds: [blockchainNetwork.blockchain.networkId], exchangeable: true))
             .sink { completion in
                 switch completion {
                 case .finished: break
