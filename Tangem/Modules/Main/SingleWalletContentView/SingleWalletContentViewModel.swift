@@ -23,10 +23,10 @@ class SingleWalletContentViewModel: ObservableObject {
     var pendingTransactionViews: [PendingTxView] {
         guard let singleWalletModel else { return [] }
 
-        let incTxViews = singleWalletModel.incomingPendingTransactions
+        let incomingTransactionsViews = singleWalletModel.incomingPendingTransactions
             .map { PendingTxView(pendingTx: $0) }
 
-        let outgTxViews = singleWalletModel.outgoingPendingTransactions
+        let outgoingTransactionsViews = singleWalletModel.outgoingPendingTransactions
             .enumerated()
             .map { index, pendingTx -> PendingTxView in
                 PendingTxView(pendingTx: pendingTx) { [weak self] in
@@ -36,7 +36,7 @@ class SingleWalletContentViewModel: ObservableObject {
                 }
             }
 
-        return incTxViews + outgTxViews
+        return incomingTransactionsViews + outgoingTransactionsViews
     }
 
     var canShowAddress: Bool {
