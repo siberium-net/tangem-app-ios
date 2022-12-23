@@ -38,6 +38,8 @@ extension CommonKeysManager: KeysManager {
         BlockchainSdkConfig(blockchairApiKeys: keys.blockchairApiKeys,
                             blockcypherTokens: keys.blockcypherTokens,
                             infuraProjectId: keys.infuraProjectId,
+                            nowNodesApiKey: "",
+                            getBlockApiKey: "",
                             tronGridApiKey: keys.tronGridApiKey,
                             // TODO: rename to solana
                             quickNodeSolanaCredentials: .init(apiKey: keys.quiknodeApiKey, subdomain: keys.quiknodeSubdomain),
