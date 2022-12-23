@@ -22,7 +22,6 @@ class DetailsCoordinator: CoordinatorObject {
     @Published var modalOnboardingCoordinator: OnboardingCoordinator? = nil
     @Published var walletConnectCoordinator: WalletConnectCoordinator? = nil
     @Published var cardSettingsCoordinator: CardSettingsCoordinator? = nil
-    @Published var appSettingsCoordinator: AppSettingsCoordinator? = nil
     @Published var referralCoordinator: ReferralCoordinator? = nil
 
     // MARK: - Child view models
@@ -32,6 +31,7 @@ class DetailsCoordinator: CoordinatorObject {
     @Published var disclaimerViewModel: DisclaimerViewModel? = nil
     @Published var supportChatViewModel: SupportChatViewModel? = nil
     @Published var scanCardSettingsViewModel: ScanCardSettingsViewModel? = nil
+    @Published var appSettingsViewModel: AppSettingsViewModel? = nil
     @Published var setupEnvironmentViewModel: EnvironmentSetupViewModel? = nil
 
     // MARK: - Helpers
@@ -95,9 +95,7 @@ extension DetailsCoordinator: DetailsRoutable {
     }
 
     func openAppSettings(userWallet: UserWallet) {
-        let coordinator = AppSettingsCoordinator(popToRootAction: popToRootAction)
-        coordinator.start(with: .default(userWallet: userWallet))
-        appSettingsCoordinator = coordinator
+        appSettingsViewModel = AppSettingsViewModel(userWallet: userWallet, coordinator: self)
     }
 
     func openSupportChat(cardId: String, dataCollector: EmailDataCollector) {
@@ -133,5 +131,18 @@ extension DetailsCoordinator: ScanCardSettingsRoutable {
         let coordinator = CardSettingsCoordinator(dismissAction: dismissAction, popToRootAction: popToRootAction)
         coordinator.start(with: .init(cardModel: cardModel))
         cardSettingsCoordinator = coordinator
+    }
+}
+
+// MARK: - AppSettingsRoutable
+
+extension DetailsCoordinator: AppSettingsRoutable {
+    func openAppSettings() {
+        guard let settingsUrl = URL(string: UIApplication.openSettingsURLString),
+              UIApplication.shared.canOpenURL(settingsUrl) else {
+            return
+        }
+
+        UIApplication.shared.open(settingsUrl, completionHandler: { _ in })
     }
 }

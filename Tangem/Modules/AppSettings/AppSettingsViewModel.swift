@@ -222,14 +222,6 @@ private extension AppSettingsViewModel {
 // MARK: - Navigation
 
 extension AppSettingsViewModel {
-    func openTokenSynchronization() {
-        coordinator.openTokenSynchronization()
-    }
-
-    func openResetSavedCards() {
-        coordinator.openResetSavedCards()
-    }
-
     func openBiometrySettings() {
         Analytics.log(.buttonEnableBiometricAuthentication)
         coordinator.openAppSettings()

@@ -32,8 +32,8 @@ struct DetailsCoordinatorView: CoordinatorView {
             .navigation(item: $coordinator.cardSettingsCoordinator) {
                 CardSettingsCoordinatorView(coordinator: $0)
             }
-            .navigation(item: $coordinator.appSettingsCoordinator) {
-                AppSettingsCoordinatorView(coordinator: $0)
+            .navigation(item: $coordinator.appSettingsViewModel) {
+                AppSettingsView(viewModel: $0)
             }
             .navigation(item: $coordinator.walletConnectCoordinator) {
                 WalletConnectCoordinatorView(coordinator: $0)
