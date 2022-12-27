@@ -30,7 +30,7 @@ def blockchain_sdk_pods
 end
 
 def tangem_sdk_pod
-  pod 'TangemSdk', :git => 'https://github.com/Tangem/tangem-sdk-ios.git', :tag => 'develop-195'
+  pod 'TangemSdk', :git => 'https://github.com/Tangem/tangem-sdk-ios.git', :tag => 'develop-196'
   # pod 'TangemSdk', :path => '../tangem-sdk-ios'
 end
 
