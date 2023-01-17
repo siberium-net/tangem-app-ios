@@ -7,6 +7,8 @@
 //
 
 import Foundation
+import WalletConnectSwiftV2
+import UIKit
 
 struct WalletConnectUIRequest {
     let event: WalletConnectEvent
@@ -15,8 +17,17 @@ struct WalletConnectUIRequest {
     var rejectAction: (() -> Void)?
 }
 
+struct WalletConnectGenericUIRequest<T> {
+    let event: WalletConnectEvent
+    let message: String
+    var positiveReactionAction: () async throws -> T
+    var negativeReactionAction: (() async throws -> T)?
+}
+
 protocol WalletConnectUIDelegate {
     func showScreen(with request: WalletConnectUIRequest)
+    @MainActor
+    func getResponseFromUser<Result>(with request: WalletConnectGenericUIRequest<Result>) async -> (() async throws -> Result)?
 }
 
 struct WalletConnectAlertUIDelegate {
@@ -33,5 +44,22 @@ extension WalletConnectAlertUIDelegate: WalletConnectUIDelegate {
         )
 
         appPresenter.show(alert)
+    }
+
+    @MainActor
+    func getResponseFromUser<Result>(with request: WalletConnectGenericUIRequest<Result>) async -> (() async throws -> Result)? {
+        await withCheckedContinuation { continuation in
+            let alert = WalletConnectUIBuilder.makeAlert(
+                for: request.event,
+                message: request.message,
+                onAcceptAction: {
+                    continuation.resume(returning: request.positiveReactionAction)
+                },
+                onReject: {
+                    continuation.resume(returning: request.negativeReactionAction)
+                }
+            )
+            appPresenter.show(alert)
+        }
     }
 }

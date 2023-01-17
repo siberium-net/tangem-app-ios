@@ -12,6 +12,9 @@ enum WalletConnectV2Error: Error {
     case unsupportedBlockchains([String])
     case sessionForTopicNotFound
     case missingBlockchains([String])
+    case unsupportedWCMethod(String)
+    case spaghettiError(String)
+    case dataInWrongFormat(String)
 
     case unknown(String)
 
@@ -20,6 +23,9 @@ enum WalletConnectV2Error: Error {
         case .unsupportedBlockchains: return 8001
         case .sessionForTopicNotFound: return 8002
         case .missingBlockchains: return 8003
+        case .unsupportedWCMethod: return 8004
+        case .spaghettiError: return 8005
+        case .dataInWrongFormat: return 8006
 
         case .unknown: return 8999
         }

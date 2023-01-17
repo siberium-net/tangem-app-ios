@@ -107,6 +107,15 @@ struct WalletConnectV2Utils {
         )
     }
 
+    func createBlockchain(for wcBlockchain: WalletConnectSwiftV2.Blockchain) -> BlockchainSdk.Blockchain? {
+        switch wcBlockchain.namespace {
+        case evmNamespace:
+            return BlockchainSdk.Blockchain.supportedBlockchains.first(where: { $0.chainId == Int(wcBlockchain.reference) })
+        default:
+            return BlockchainSdk.Blockchain(from: wcBlockchain.namespace)
+        }
+    }
+
     private func createBlockchains(from namespaces: [String: SessionNamespace]) -> [BlockchainNetwork] {
         var blockchains = [BlockchainSdk.Blockchain]()
         for (_, sessionNamespace) in namespaces {
@@ -116,14 +125,5 @@ struct WalletConnectV2Utils {
         }
 
         return blockchains.map { BlockchainNetwork($0, derivationPath: $0.derivationPath(for: .new)) }
-    }
-
-    private func createBlockchain(for wcBlockchain: WalletConnectSwiftV2.Blockchain) -> BlockchainSdk.Blockchain? {
-        switch wcBlockchain.namespace {
-        case evmNamespace:
-            return BlockchainSdk.Blockchain.supportedBlockchains.first(where: { $0.chainId == Int(wcBlockchain.reference) })
-        default:
-            return BlockchainSdk.Blockchain(from: wcBlockchain.namespace)
-        }
     }
 }

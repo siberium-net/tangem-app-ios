@@ -10,6 +10,7 @@ import WalletConnectSwiftV2
 
 protocol WalletConnectV2MessageComposable {
     func makeMessage(for proposal: Session.Proposal, targetBlockchains: [String]) -> String
+    func makeMessage(for request: Request) -> String
     func makeErrorMessage(_ error: WalletConnectV2Error) -> String
 }
 
@@ -35,6 +36,12 @@ extension WalletConnectV2MessageComposer: WalletConnectV2MessageComposable {
         return message
     }
 
+    func makeMessage(for request: Request) -> String {
+        var message = ""
+
+        return message
+    }
+
     func makeErrorMessage(_ error: WalletConnectV2Error) -> String {
         switch error {
         case .unsupportedBlockchains(let blockchainNames):
@@ -44,16 +51,14 @@ extension WalletConnectV2MessageComposer: WalletConnectV2MessageComposable {
             message += unsupportedChains
 
             return message
-        case .sessionForTopicNotFound:
-            return "We've encountered unknown error. Error code: \(error.code). If the problem persists — feel free to contact our support"
         case .missingBlockchains(let blockchainNames):
             var message = "Not all tokens were added to your list. Please add them first and try again. Missing tokens:\n"
             message += blockchainNames.joined(separator: ", ")
 
             return message
 
-        case .unknown(let errorMessage):
-            return "We've encountered unknown error. Error code: \(errorMessage). If the problem persists — feel free to contact our support"
+        case .unknown, .sessionForTopicNotFound, .unsupportedWCMethod, .spaghettiError, .dataInWrongFormat:
+            return "We've encountered unknown error. Error code: \(error.code). If the problem persists — feel free to contact our support"
         }
     }
 }
