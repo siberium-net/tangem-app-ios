@@ -15,6 +15,7 @@ enum WalletConnectV2Error: Error {
     case unsupportedWCMethod(String)
     case spaghettiError(String)
     case dataInWrongFormat(String)
+    case notEnoughDataInRequest(String)
 
     case unknown(String)
 
@@ -26,6 +27,7 @@ enum WalletConnectV2Error: Error {
         case .unsupportedWCMethod: return 8004
         case .spaghettiError: return 8005
         case .dataInWrongFormat: return 8006
+        case .notEnoughDataInRequest: return 8007
 
         case .unknown: return 8999
         }

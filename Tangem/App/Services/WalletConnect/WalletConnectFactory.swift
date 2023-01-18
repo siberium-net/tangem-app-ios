@@ -20,9 +20,11 @@ struct WalletConnectFactory {
 
         let uiDelegate = WalletConnectAlertUIDelegate()
         let messageComposer = WalletConnectV2MessageComposer()
-        let wcMessageHandler = CommonWalletConnectV2MessageHandler(
+        let handlersFactory = WalletConnectHandlersFactory()
+        let wcMessageHandler = WalletConnectV2HandlersService(
             uiDelegate: uiDelegate,
-            messageComposer: messageComposer
+            messageComposer: messageComposer,
+            handlerFactory: handlersFactory
         )
         let v2Service = WalletConnectV2Service(
             with: model,

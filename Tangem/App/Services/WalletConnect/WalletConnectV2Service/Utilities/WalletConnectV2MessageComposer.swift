@@ -57,7 +57,7 @@ extension WalletConnectV2MessageComposer: WalletConnectV2MessageComposable {
 
             return message
 
-        case .unknown, .sessionForTopicNotFound, .unsupportedWCMethod, .spaghettiError, .dataInWrongFormat:
+        case .unknown, .sessionForTopicNotFound, .unsupportedWCMethod, .spaghettiError, .dataInWrongFormat, .notEnoughDataInRequest:
             return "We've encountered unknown error. Error code: \(error.code). If the problem persists — feel free to contact our support"
         }
     }

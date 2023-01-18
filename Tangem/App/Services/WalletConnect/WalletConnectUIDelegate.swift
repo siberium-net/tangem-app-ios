@@ -20,8 +20,8 @@ struct WalletConnectUIRequest {
 struct WalletConnectGenericUIRequest<T> {
     let event: WalletConnectEvent
     let message: String
-    var positiveReactionAction: () async throws -> T
-    var negativeReactionAction: (() async throws -> T)?
+    var approveAction: () async throws -> T
+    var rejectAction: (() async throws -> T)?
 }
 
 protocol WalletConnectUIDelegate {
@@ -53,10 +53,10 @@ extension WalletConnectAlertUIDelegate: WalletConnectUIDelegate {
                 for: request.event,
                 message: request.message,
                 onAcceptAction: {
-                    continuation.resume(returning: request.positiveReactionAction)
+                    continuation.resume(returning: request.approveAction)
                 },
                 onReject: {
-                    continuation.resume(returning: request.negativeReactionAction)
+                    continuation.resume(returning: request.rejectAction)
                 }
             )
             appPresenter.show(alert)
