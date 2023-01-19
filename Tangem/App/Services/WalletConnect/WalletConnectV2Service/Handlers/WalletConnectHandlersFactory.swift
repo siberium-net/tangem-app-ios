@@ -54,7 +54,10 @@ struct WalletConnectHandlersFactory {
         case .bnbTxConfirmation:
             fallthrough
         case .signTypedData, .signTypedDataV4:
-            fallthrough
+            return try WalletConnectV2SignTypedDataHandler(
+                requestParams: params,
+                signer: wcSigner
+            )
         case .switchChain:
             throw WalletConnectV2Error.unsupportedWCMethod("Switch chain for WC 2.0")
         }
