@@ -42,12 +42,12 @@ struct WalletConnectV2PersonalSignHandler {
 }
 
 extension WalletConnectV2PersonalSignHandler: WalletConnectMessageHandler {
-    func messageForUser(from dApp: WalletConnectSavedSession.DAppInfo) -> String {
+    func messageForUser(from dApp: WalletConnectSavedSession.DAppInfo) async throws -> String {
         let message = Localization.walletConnectPersonalSignMessage(dApp.name, dataToSign.hexString)
         return Localization.walletConnectAlertSignMessage(message)
     }
 
-    func handle(with walletModel: WalletModel) async throws -> RPCResult {
+    func handle() async throws -> RPCResult {
         let personalMessageData = makePersonalMessageData(dataToSign)
         let hash = personalMessageData.sha3(.keccak256)
         do {

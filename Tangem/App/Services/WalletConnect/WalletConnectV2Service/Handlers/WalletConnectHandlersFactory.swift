@@ -10,6 +10,20 @@ import Foundation
 import WalletConnectSwiftV2
 
 struct WalletConnectHandlersFactory {
+    private let messageComposer: WalletConnectV2MessageComposable
+    private let uiDelegate: WalletConnectUIDelegate
+    private let ethTransactionBuilder: WalletConnectEthTransactionBuildable
+
+    init(
+        messageComposer: WalletConnectV2MessageComposable,
+        uiDelegate: WalletConnectUIDelegate,
+        ethTransactionBuilder: WalletConnectEthTransactionBuildable
+    ) {
+        self.messageComposer = messageComposer
+        self.uiDelegate = uiDelegate
+        self.ethTransactionBuilder = ethTransactionBuilder
+    }
+
     func createHandler(for action: WalletConnectAction, with params: AnyCodable, using signer: TangemSigner, and walletModel: WalletModel) throws -> WalletConnectMessageHandler {
         let wcSigner = WalletConnectSigner(walletModel: walletModel, signer: signer)
         switch action {
@@ -19,9 +33,22 @@ struct WalletConnectHandlersFactory {
                 using: wcSigner
             )
         case .signTransaction:
-            fallthrough
+            return try WalletConnectV2SignTransactionHandler(
+                requestParams: params,
+                walletModel: walletModel,
+                transactionBuilder: ethTransactionBuilder,
+                messageComposer: messageComposer,
+                signer: signer
+            )
         case .sendTransaction:
-            fallthrough
+            return try WalletConnectV2SendTransactionHandler(
+                requestParams: params,
+                walletModel: walletModel,
+                transactionBuilder: ethTransactionBuilder,
+                messageComposer: messageComposer,
+                signer: signer,
+                uiDelegate: uiDelegate
+            )
         case .bnbSign:
             fallthrough
         case .bnbTxConfirmation:

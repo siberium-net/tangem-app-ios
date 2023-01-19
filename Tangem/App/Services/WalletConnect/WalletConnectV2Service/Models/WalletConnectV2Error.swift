@@ -16,6 +16,10 @@ enum WalletConnectV2Error: Error {
     case spaghettiError(String)
     case dataInWrongFormat(String)
     case notEnoughDataInRequest(String)
+    case missingGasLoader
+    case missingEthTransactionSigner
+    case missingTransaction
+    case transactionSentButNotFoundInManager
 
     case unknown(String)
 
@@ -28,6 +32,10 @@ enum WalletConnectV2Error: Error {
         case .spaghettiError: return 8005
         case .dataInWrongFormat: return 8006
         case .notEnoughDataInRequest: return 8007
+        case .missingGasLoader: return 8008
+        case .missingEthTransactionSigner: return 8009
+        case .missingTransaction: return 8010
+        case .transactionSentButNotFoundInManager: return 8011
 
         case .unknown: return 8999
         }

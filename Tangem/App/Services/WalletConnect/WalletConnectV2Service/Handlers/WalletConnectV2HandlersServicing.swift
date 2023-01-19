@@ -21,8 +21,8 @@ protocol WalletConnectV2HandlersServicing {
 }
 
 protocol WalletConnectMessageHandler {
-    func messageForUser(from dApp: WalletConnectSavedSession.DAppInfo) -> String
-    func handle(with walletModel: WalletModel) async throws -> RPCResult
+    func messageForUser(from dApp: WalletConnectSavedSession.DAppInfo) async throws -> String
+    func handle() async throws -> RPCResult
 }
 
 struct WalletConnectV2HandlersService {
@@ -48,7 +48,6 @@ struct WalletConnectV2HandlersService {
             throw WalletConnectV2Error.unsupportedWCMethod(method)
         }
 
-        let wcSigner = WalletConnectSigner(walletModel: walletModel, signer: signer)
         return try handlerFactory.createHandler(for: wcAction, with: request.params, using: signer, and: walletModel)
     }
 }
@@ -56,6 +55,7 @@ struct WalletConnectV2HandlersService {
 extension WalletConnectV2HandlersService: WalletConnectV2HandlersServicing {
     func handle(_ request: Request, from dApp: WalletConnectSavedSession.DAppInfo, using signer: TangemSigner, with walletModel: WalletModel) async throws -> RPCResult {
         let handler = try getHandler(for: request, using: signer, walletModel: walletModel)
+        let messageForUser = try await handler.messageForUser(from: dApp)
 
         let rejectAction = {
             AppLog.shared.debug("[WC 2.0] User rejected sign request: \(request)")
@@ -64,17 +64,13 @@ extension WalletConnectV2HandlersService: WalletConnectV2HandlersServicing {
 
         let selectedAction = await uiDelegate.getResponseFromUser(with: WalletConnectGenericUIRequest(
             event: .sign,
-            message: handler.messageForUser(from: dApp),
+            message: try await handler.messageForUser(from: dApp),
             approveAction: {
                 AppLog.shared.debug("[WC 2.0] User approved sign request: \(request)")
-                return try await handler.handle(with: walletModel)
+                return try await handler.handle()
             },
             rejectAction: rejectAction
         ))
-
-        guard let selectedAction else {
-            return Self.userRejectedResult
-        }
 
         return try await selectedAction()
     }

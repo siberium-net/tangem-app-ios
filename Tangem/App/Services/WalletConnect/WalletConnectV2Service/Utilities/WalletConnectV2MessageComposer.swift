@@ -6,11 +6,12 @@
 //  Copyright © 2022 Tangem AG. All rights reserved.
 //
 
+import BlockchainSdk
 import WalletConnectSwiftV2
 
 protocol WalletConnectV2MessageComposable {
     func makeMessage(for proposal: Session.Proposal, targetBlockchains: [String]) -> String
-    func makeMessage(for request: Request) -> String
+    func makeMessage(for transaction: Transaction, walletModel: WalletModel, dApp: WalletConnectSavedSession.DAppInfo) -> String
     func makeErrorMessage(_ error: WalletConnectV2Error) -> String
 }
 
@@ -36,9 +37,24 @@ extension WalletConnectV2MessageComposer: WalletConnectV2MessageComposable {
         return message
     }
 
-    func makeMessage(for request: Request) -> String {
-        var message = ""
-
+    func makeMessage(for transaction: Transaction, walletModel: WalletModel, dApp: WalletConnectSavedSession.DAppInfo) -> String {
+        let totalAmount = transaction.amount + transaction.fee
+        let balance = walletModel.wallet.amounts[.coin] ?? .zeroCoin(for: walletModel.wallet.blockchain)
+        let message: String = {
+            var m = ""
+            m += Localization.walletConnectCreateTxMessage(
+                dApp.name,
+                dApp.url,
+                transaction.amount.description,
+                transaction.fee.description,
+                totalAmount.description,
+                walletModel.getBalance(for: .coin)
+            )
+            if balance < totalAmount {
+                m += "\n\n" + Localization.walletConnectCreateTxNotEnoughFunds
+            }
+            return m
+        }()
         return message
     }
 
@@ -57,7 +73,7 @@ extension WalletConnectV2MessageComposer: WalletConnectV2MessageComposable {
 
             return message
 
-        case .unknown, .sessionForTopicNotFound, .unsupportedWCMethod, .spaghettiError, .dataInWrongFormat, .notEnoughDataInRequest:
+        default:
             return "We've encountered unknown error. Error code: \(error.code). If the problem persists — feel free to contact our support"
         }
     }
