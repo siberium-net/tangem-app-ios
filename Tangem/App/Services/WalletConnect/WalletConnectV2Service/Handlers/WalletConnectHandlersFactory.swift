@@ -49,10 +49,12 @@ struct WalletConnectHandlersFactory {
                 signer: signer,
                 uiDelegate: uiDelegate
             )
-        case .bnbSign:
-            fallthrough
-        case .bnbTxConfirmation:
-            fallthrough
+        case .bnbSign, .bnbTxConfirmation:
+            // TODO: https://tangem.atlassian.net/browse/IOS-2896
+            // Initially this methods was found occasionally and supported without any request
+            // Need to find documentation and find place where it can be tested on 2.0
+            // This page https://www.bnbchain.org/en/staking has WalletConnect in status 'Coming Soon'
+            throw WalletConnectV2Error.unsupportedWCMethod("BNB methods")
         case .signTypedData, .signTypedDataV4:
             return try WalletConnectV2SignTypedDataHandler(
                 requestParams: params,

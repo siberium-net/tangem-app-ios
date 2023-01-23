@@ -55,7 +55,6 @@ struct WalletConnectV2HandlersService {
 extension WalletConnectV2HandlersService: WalletConnectV2HandlersServicing {
     func handle(_ request: Request, from dApp: WalletConnectSavedSession.DAppInfo, using signer: TangemSigner, with walletModel: WalletModel) async throws -> RPCResult {
         let handler = try getHandler(for: request, using: signer, walletModel: walletModel)
-        let messageForUser = try await handler.messageForUser(from: dApp)
 
         let rejectAction = {
             AppLog.shared.debug("[WC 2.0] User rejected sign request: \(request)")

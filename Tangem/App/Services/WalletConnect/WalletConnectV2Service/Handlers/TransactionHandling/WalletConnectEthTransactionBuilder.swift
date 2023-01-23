@@ -87,8 +87,8 @@ extension WalletConnectEthTransactionBuilder: WalletConnectEthTransactionBuildab
         var transaction = try walletModel.walletManager.createTransaction(
             amount: valueAmount,
             fee: gasAmount,
-            destinationAddress: wcTransaction.to,
-            sourceAddress: wcTransaction.from
+            sourceAddress: wcTransaction.from,
+            destinationAddress: wcTransaction.to
         )
 
         let contractDataString = wcTransaction.data.drop0xPrefix
