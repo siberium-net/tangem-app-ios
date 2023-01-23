@@ -61,20 +61,19 @@ extension WalletConnectV2MessageComposer: WalletConnectV2MessageComposable {
     func makeErrorMessage(_ error: WalletConnectV2Error) -> String {
         switch error {
         case .unsupportedBlockchains(let blockchainNames):
-            let unsupportedChains = blockchainNames.joined(separator: ", ")
-
-            var message = "Session request contains unsupported blockchains for WalletConnect connection. Unsupported blockchains:\n"
-            message += unsupportedChains
-
-            return message
-        case .missingBlockchains(let blockchainNames):
-            var message = "Not all tokens were added to your list. Please add them first and try again. Missing tokens:\n"
+            var message = Localization.walletConnectErrorUnsupportedBlockchains
             message += blockchainNames.joined(separator: ", ")
 
             return message
+        case .missingBlockchains(let blockchainNames):
+            var message = Localization.walletConnectErrorMissingBlockchains
+            message += blockchainNames.joined(separator: ", ")
 
+            return message
+        case .unknown(let errorMessage):
+            return Localization.walletConnectErrorWithFrameworkMessage(errorMessage)
         default:
-            return "We've encountered unknown error. Error code: \(error.code). If the problem persists — feel free to contact our support"
+            return Localization.walletConnectGenericErrorWithCode(error.code)
         }
     }
 }
