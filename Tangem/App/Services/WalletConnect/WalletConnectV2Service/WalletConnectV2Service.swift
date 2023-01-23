@@ -87,8 +87,6 @@ class WalletConnectV2Service {
             self.log("Currently active sessions. Restored by framework: \(sessions)")
 
             self.log("Loaded sessions from internal storage: \(loadedSessions)")
-
-            AppLog.shared.debug("------Stop-------")
         }
     }
 

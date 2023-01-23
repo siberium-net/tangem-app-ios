@@ -50,6 +50,8 @@ class WalletConnectV2SendTransactionHandler {
 }
 
 extension WalletConnectV2SendTransactionHandler: WalletConnectMessageHandler {
+    var event: WalletConnectEvent { .sendTx }
+
     func messageForUser(from dApp: WalletConnectSavedSession.DAppInfo) async throws -> String {
         let transaction = try await transactionBuilder.buildTx(from: wcTransaction, for: walletModel)
         transactionToSend = transaction
@@ -76,7 +78,7 @@ extension WalletConnectV2SendTransactionHandler: WalletConnectMessageHandler {
             return RPCResult.response(AnyCodable(txHash))
         }
 
-        let selectedAction = await uiDelegate.getResponseFromUser(with: WalletConnectGenericUIRequest(
+        let selectedAction = await uiDelegate.getResponseFromUser(with: WalletConnectAsyncUIRequest(
             event: .success,
             message: Localization.sendTransactionSuccess,
             approveAction: approveAction

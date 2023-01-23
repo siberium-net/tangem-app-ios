@@ -29,7 +29,6 @@ struct WalletConnectFactory {
         )
         let wcMessageHandler = WalletConnectV2HandlersService(
             uiDelegate: uiDelegate,
-            messageComposer: messageComposer,
             handlerFactory: handlersFactory
         )
         let v2Service = WalletConnectV2Service(

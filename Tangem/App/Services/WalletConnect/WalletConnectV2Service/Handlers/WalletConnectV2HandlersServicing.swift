@@ -8,8 +8,6 @@
 
 import Foundation
 import WalletConnectSwiftV2
-import TangemSdk
-import BlockchainSdk
 
 protocol WalletConnectV2HandlersServicing {
     func handle(
@@ -21,24 +19,22 @@ protocol WalletConnectV2HandlersServicing {
 }
 
 protocol WalletConnectMessageHandler {
+    var event: WalletConnectEvent { get }
     func messageForUser(from dApp: WalletConnectSavedSession.DAppInfo) async throws -> String
     func handle() async throws -> RPCResult
 }
 
 struct WalletConnectV2HandlersService {
     private let uiDelegate: WalletConnectAlertUIDelegate
-    private let messageComposer: WalletConnectV2MessageComposable
     private let handlerFactory: WalletConnectHandlersFactory
 
     private static let userRejectedResult = RPCResult.error(.init(code: 0, message: "User rejected sign"))
 
     init(
         uiDelegate: WalletConnectAlertUIDelegate,
-        messageComposer: WalletConnectV2MessageComposable,
         handlerFactory: WalletConnectHandlersFactory
     ) {
         self.uiDelegate = uiDelegate
-        self.messageComposer = messageComposer
         self.handlerFactory = handlerFactory
     }
 
@@ -61,8 +57,8 @@ extension WalletConnectV2HandlersService: WalletConnectV2HandlersServicing {
             return Self.userRejectedResult
         }
 
-        let selectedAction = await uiDelegate.getResponseFromUser(with: WalletConnectGenericUIRequest(
-            event: .sign,
+        let selectedAction = await uiDelegate.getResponseFromUser(with: WalletConnectAsyncUIRequest(
+            event: handler.event,
             message: try await handler.messageForUser(from: dApp),
             approveAction: {
                 AppLog.shared.debug("[WC 2.0] User approved sign request: \(request)")

@@ -46,6 +46,8 @@ class WalletConnectV2SignTransactionHandler {
 }
 
 extension WalletConnectV2SignTransactionHandler: WalletConnectMessageHandler {
+    var event: WalletConnectEvent { .sendTx }
+
     func messageForUser(from dApp: WalletConnectSavedSession.DAppInfo) async throws -> String {
         let transaction = try await transactionBuilder.buildTx(from: ethTransaction, for: walletModel)
         self.transaction = transaction
