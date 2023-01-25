@@ -59,8 +59,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if !AppEnvironment.current.isDebug {
             configureFirebase()
             configureAppsFlyer()
-            configureAmplitude()
         }
+
+        configureAmplitude()
 
         AppSettings.shared.numberOfLaunches += 1
         S2CTOUMigrator().migrate()
@@ -129,9 +130,9 @@ private extension AppDelegate {
     }
 
     func configureAmplitude() {
-        guard AppEnvironment.current.isProduction else { return }
+//        guard AppEnvironment.current.isProduction else { return }
 
         Amplitude.instance().trackingSessionEvents = true
-        Amplitude.instance().initializeApiKey(try! CommonKeysManager().amplitudeApiKey)
+        Amplitude.instance().initializeApiKey(try! CommonKeysManager().amplitudeApiKey, userId: "Alyona!")
     }
 }
