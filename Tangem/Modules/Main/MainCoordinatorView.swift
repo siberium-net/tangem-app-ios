@@ -86,10 +86,10 @@ struct MainCoordinatorView: CoordinatorView {
 
         NavHolder()
             .bottomSheet(
-                item: $coordinator.warningBankCardViewModel,
+                item: $coordinator.warningRussiaBankCardCoordinator,
                 viewModelSettings: .warning
             ) {
-                WarningBankCardView(viewModel: $0)
+                WarningRussiaBankCardCoordinatorView(coordinator: $0)
             }
 
         NavHolder()

@@ -32,6 +32,9 @@ struct TokenDetailsCoordinatorView: CoordinatorView {
             .navigation(item: $coordinator.swappingCoordinator) {
                 SwappingCoordinatorView(coordinator: $0)
             }
+//            .navigation(item: $coordinator.cryptoShopCoordinator) {
+//                CryptoShopCoordinatorView(coordinator: $0)
+//            }
     }
 
     @ViewBuilder
@@ -53,10 +56,18 @@ struct TokenDetailsCoordinatorView: CoordinatorView {
 
         NavHolder()
             .bottomSheet(
-                item: $coordinator.warningBankCardViewModel,
+                item: $coordinator.warningRussiaBankCardCoordinator,
                 viewModelSettings: .warning
             ) {
-                WarningBankCardView(viewModel: $0)
+                WarningRussiaBankCardCoordinatorView(coordinator: $0)
+            }
+
+        NavHolder()
+            .bottomSheet(
+                item: $coordinator.cryptoShopCoordinator,
+                viewModelSettings: .warning
+            ) {
+                CryptoShopCoordinatorView(coordinator: $0)
             }
     }
 }

@@ -1,16 +1,19 @@
 //
-//  WarningBankCardView.swift
+//  WarningRussiaBankCardView.swift
 //  Tangem
 //
-//  Created by Pavel Grechikhin on 07.07.2022.
-//  Copyright © 2022 Tangem AG. All rights reserved.
+//  Created by Sergey Balashov on 30.01.2023.
+//  Copyright © 2023 Tangem AG. All rights reserved.
 //
 
-import Foundation
 import SwiftUI
 
-struct WarningBankCardView: View {
-    let viewModel: WarningBankCardViewModel
+struct WarningRussiaBankCardView: View {
+    @ObservedObject private var viewModel: WarningRussiaBankCardViewModel
+
+    init(viewModel: WarningRussiaBankCardViewModel) {
+        self.viewModel = viewModel
+    }
 
     var body: some View {
         VStack(spacing: 0) {
@@ -31,13 +34,13 @@ struct WarningBankCardView: View {
             HStack(spacing: 11) {
                 MainButton(
                     title: Localization.commonYes,
-                    action: viewModel.confirmCallback
+                    action: viewModel.didTapConfirm
                 )
 
                 MainButton(
                     title: Localization.commonNo,
                     style: .secondary,
-                    action: viewModel.declineCallback
+                    action: viewModel.didTapDecline
                 )
             }
             .padding(.horizontal, 16)
@@ -47,8 +50,10 @@ struct WarningBankCardView: View {
     }
 }
 
-struct WarningBankCardView_Previews: PreviewProvider {
+struct WarningRussiaBankCardView_Preview: PreviewProvider {
+    static let viewModel = WarningRussiaBankCardViewModel(coordinator: WarningRussiaBankCardCoordinator())
+
     static var previews: some View {
-        WarningBankCardView(viewModel: WarningBankCardViewModel(confirmCallback: {}, declineCallback: {}))
+        WarningRussiaBankCardView(viewModel: viewModel)
     }
 }

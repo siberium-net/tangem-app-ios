@@ -28,6 +28,7 @@ class MainCoordinator: CoordinatorObject {
     @Published var detailsCoordinator: DetailsCoordinator? = nil
     @Published var tokenListCoordinator: TokenListCoordinator? = nil
     @Published var modalOnboardingCoordinator: OnboardingCoordinator? = nil
+    @Published var warningRussiaBankCardCoordinator: WarningRussiaBankCardCoordinator? = nil
 
     // MARK: - Child view models
 
@@ -36,7 +37,6 @@ class MainCoordinator: CoordinatorObject {
     @Published var currencySelectViewModel: CurrencySelectViewModel? = nil
     @Published var mailViewModel: MailViewModel? = nil
     @Published var addressQrBottomSheetContentViewModel: AddressQrBottomSheetContentViewModel? = nil
-    @Published var warningBankCardViewModel: WarningBankCardViewModel? = nil
     @Published var userWalletListCoordinator: UserWalletListCoordinator?
 
     // MARK: - Helpers
@@ -127,6 +127,31 @@ extension MainCoordinator: MainRoutable {
                 },
             ]
         )
+//
+//        pushedWebViewModel = WebViewContainerViewModel(
+//            url: url,
+//            title: Localization.walletButtonBuy,
+//            addLoadingIndicator: true,
+//            urlActions: [
+//                closeUrl: { [weak self] response in
+//                    self?.pushedWebViewModel = nil
+//                    action(response)
+//                },
+//            ]
+//        )
+//
+//        buyCryptoModel = .init(
+//            url: url,
+//            title: Localization.walletButtonBuy,
+//            addLoadingIndicator: true,
+//            withCloseButton: true,
+//            urlActions: [closeUrl: { [weak self] response in
+//                DispatchQueue.main.async {
+//                    action(response)
+//                    self?.buyCryptoModel = nil
+//                }
+//            }]
+//        )
     }
 
     func openSellCrypto(at url: URL, sellRequestUrl: String, action: @escaping (String) -> Void) {
@@ -249,19 +274,24 @@ extension MainCoordinator: MainRoutable {
         addressQrBottomSheetContentViewModel = .init(shareAddress: shareAddress, address: address, qrNotice: qrNotice)
     }
 
-    func openBankWarning(confirmCallback: @escaping () -> Void, declineCallback: @escaping () -> Void) {
-        let delay = 0.6
-        warningBankCardViewModel = .init(confirmCallback: { [weak self] in
-            self?.warningBankCardViewModel = nil
-            DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
-                confirmCallback()
-            }
-        }, declineCallback: { [weak self] in
-            self?.warningBankCardViewModel = nil
-            DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
-                declineCallback()
-            }
-        })
+    func openBankWarning() {
+        let coordinator = WarningRussiaBankCardCoordinator()
+        coordinator.start(with: .default)
+        warningRussiaBankCardCoordinator = coordinator
+//
+//        let delay = 0.6
+//
+//        warningBankCardViewModel = .init(confirmCallback: { [weak self] in
+//            self?.warningBankCardViewModel = nil
+//            DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
+//                confirmCallback()
+//            }
+//        }, declineCallback: { [weak self] in
+//            self?.warningBankCardViewModel = nil
+//            DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
+//                declineCallback()
+//            }
+//        })
     }
 
     func openP2PTutorial() {

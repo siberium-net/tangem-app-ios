@@ -140,11 +140,12 @@ extension OnboardingTopupViewModel {
         Analytics.log(.buttonBuyCrypto)
 
         if tangemApiService.geoIpRegionCode == LanguageCode.ru {
-            coordinator.openBankWarning {
-                self.openBuyCrypto()
-            } declineCallback: {
-                self.openP2PTutorial()
-            }
+            coordinator.openBankWarning()
+//            {
+//                self.openBuyCrypto()
+//            } declineCallback: {
+//                self.openP2PTutorial()
+//            }
         } else {
             openBuyCrypto()
         }

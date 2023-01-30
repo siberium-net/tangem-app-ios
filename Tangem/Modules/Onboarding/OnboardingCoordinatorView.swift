@@ -67,13 +67,13 @@ struct OnboardingCoordinatorView: CoordinatorView {
                     .edgesIgnoringSafeArea(.vertical)
             }
 
-        NavHolder()
-            .bottomSheet(
-                item: $coordinator.warningBankCardViewModel,
-                viewModelSettings: .warning
-            ) {
-                WarningBankCardView(viewModel: $0)
-            }
+//        NavHolder()
+//            .bottomSheet(
+//                item: $coordinator.warningBankCardViewModel,
+//                viewModelSettings: .warning
+//            ) {
+//                WarningBankCardView(viewModel: $0)
+//            }
 
         NavHolder()
             .sheet(item: $coordinator.modalWebViewModel) {

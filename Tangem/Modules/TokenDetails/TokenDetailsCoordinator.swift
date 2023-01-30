@@ -9,7 +9,9 @@
 import Foundation
 import BlockchainSdk
 
-class TokenDetailsCoordinator: CoordinatorObject {
+class TokenDetailsCoordinator: CoordinatorObject, CryptoShopRoutable {
+    func userDidBuyCrypto() {}
+
     var dismissAction: Action
     var popToRootAction: ParamsAction<PopToRootOptions>
 
@@ -22,12 +24,13 @@ class TokenDetailsCoordinator: CoordinatorObject {
     @Published var sendCoordinator: SendCoordinator? = nil
     @Published var pushTxCoordinator: PushTxCoordinator? = nil
     @Published var swappingCoordinator: SwappingCoordinator? = nil
+    @Published var warningRussiaBankCardCoordinator: WarningRussiaBankCardCoordinator? = nil
+    @Published var cryptoShopCoordinator: CryptoShopCoordinator? = nil
 
     // MARK: - Child view models
 
     @Published var pushedWebViewModel: WebViewContainerViewModel? = nil
     @Published var modalWebViewModel: WebViewContainerViewModel? = nil
-    @Published var warningBankCardViewModel: WarningBankCardViewModel? = nil
 
     required init(dismissAction: @escaping Action, popToRootAction: @escaping ParamsAction<PopToRootOptions>) {
         self.dismissAction = dismissAction
@@ -130,20 +133,36 @@ extension TokenDetailsCoordinator: TokenDetailsRoutable {
         pushTxCoordinator = coordinator
     }
 
-    func openBankWarning(confirmCallback: @escaping () -> Void, declineCallback: @escaping () -> Void) {
-        let delay = 0.6
-        warningBankCardViewModel = .init(confirmCallback: { [weak self] in
-            self?.warningBankCardViewModel = nil
-            DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
-                confirmCallback()
-            }
-        }, declineCallback: { [weak self] in
-            self?.warningBankCardViewModel = nil
-            DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
-                declineCallback()
-            }
-        })
+    func openBankWarning() {
+//
+//        let coordinator = WarningRussiaBankCardCoordinator()
+//        coordinator.start(with: .default)
+//        warningRussiaBankCardCoordinator = coordinator
+//
+        cryptoShopCoordinator = .init(router: self, dismissAction: dismissAction, popToRootAction: popToRootAction)
+        cryptoShopCoordinator?.start(with: .init(
+            url: URL(string: "https://tangem.com/howtobuy.html")!,
+            closeUrl: "",
+            action: { _ in },
+            presentationMode: .modal
+        ))
     }
+
+//
+//    func openBankWarning(confirmCallback: @escaping () -> Void, declineCallback: @escaping () -> Void) {
+//        let delay = 0.6
+//        warningBankCardViewModel = .init(confirmCallback: { [weak self] in
+//            self?.warningBankCardViewModel = nil
+//            DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
+//                confirmCallback()
+//            }
+//        }, declineCallback: { [weak self] in
+//            self?.warningBankCardViewModel = nil
+//            DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
+//                declineCallback()
+//            }
+//        })
+//    }
 
     func openP2PTutorial() {
         modalWebViewModel = WebViewContainerViewModel(
