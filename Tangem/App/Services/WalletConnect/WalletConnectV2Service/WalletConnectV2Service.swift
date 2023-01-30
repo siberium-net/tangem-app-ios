@@ -15,6 +15,7 @@ protocol WalletConnectUserWalletInfoProvider {
     var name: String { get }
     var userWalletId: Data? { get }
     var walletModels: [WalletModel] { get }
+    var signer: TangemSigner { get }
 }
 
 class WalletConnectV2Service {
@@ -267,12 +268,12 @@ class WalletConnectV2Service {
             return
         }
 
-        guard let targetWallet = cardModel.walletModels.first(where: { $0.wallet.blockchain == targetBlockchain }) else {
+        guard let targetWallet = infoProvider.walletModels.first(where: { $0.wallet.blockchain == targetBlockchain }) else {
             log("Failed to find wallet for \(targetBlockchain) for \(logSuffix)")
             return
         }
 
-        let signer = cardModel.signer
+        let signer = infoProvider.signer
         do {
             let result = try await wcMessageHandler.handle(
                 request,
@@ -313,11 +314,11 @@ extension WalletConnectV2Service: URLHandler {
     }
 
     private func pairClient(with url: WalletConnectURI) {
-        log("Trying to pair client: \(uri)")
+        log("Trying to pair client: \(url)")
         runTask { [weak self] in
             do {
                 try await self?.pairApi.pair(uri: url)
-                log("Established pair for \(uri)")
+                self?.log("Established pair for \(url)")
             } catch {
                 AppLog.shared.error("[WC 2.0] Failed to connect to \(url) with error: \(error)")
             }

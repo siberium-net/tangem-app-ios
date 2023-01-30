@@ -31,7 +31,12 @@ struct WalletConnectEthTransactionBuilder {
         }
 
         do {
-            let gasLimitBigInt = try await gasLoader.getGasLimit(amount: amount, destination: tx.to).async()
+            let gasLimitBigInt = try await gasLoader.getGasLimit(
+                to: tx.to,
+                from: tx.from,
+                value: tx.value,
+                data: tx.data
+            ).async()
             return Int(gasLimitBigInt)
         } catch {
             return defaultGasLimit
