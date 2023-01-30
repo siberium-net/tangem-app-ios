@@ -28,11 +28,9 @@ protocol WalletConnectUIDelegate {
     func getResponseFromUser<Result>(with request: WalletConnectAsyncUIRequest<Result>) async -> (() async throws -> Result)
 }
 
-struct WalletConnectAlertUIDelegate {
+struct WalletConnectAlertUIDelegate: WalletConnectUIDelegate {
     private let appPresenter: AppPresenter = .shared
-}
 
-extension WalletConnectAlertUIDelegate: WalletConnectUIDelegate {
     func showScreen(with request: WalletConnectUIRequest) {
         let alert = WalletConnectUIBuilder.makeAlert(
             for: request.event,

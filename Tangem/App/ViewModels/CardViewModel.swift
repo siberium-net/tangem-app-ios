@@ -108,8 +108,8 @@ class CardViewModel: Identifiable, ObservableObject {
         !config.getFeatureAvailability(.walletConnect).isHidden
     }
 
-    var cardTouURL: URL {
-        config.tou.url
+    var cardDisclaimer: TOU {
+        config.tou
     }
 
     var embeddedBlockchain: Blockchain? {
@@ -185,7 +185,7 @@ class CardViewModel: Identifiable, ObservableObject {
         config.hasFeature(.send)
     }
 
-    var cardAmountType: Amount.AmountType {
+    var cardAmountType: Amount.AmountType? {
         config.cardAmountType
     }
 
@@ -224,7 +224,6 @@ class CardViewModel: Identifiable, ObservableObject {
         return OnboardingInput(
             steps: backupSteps,
             cardInput: .cardModel(self),
-            welcomeStep: nil,
             twinData: nil,
             currentStepIndex: 0,
             isStandalone: true
@@ -235,7 +234,6 @@ class CardViewModel: Identifiable, ObservableObject {
         OnboardingInput(
             steps: config.onboardingSteps,
             cardInput: .cardModel(self),
-            welcomeStep: nil,
             twinData: cardInfo.walletData.twinData,
             currentStepIndex: 0
         )
@@ -247,7 +245,6 @@ class CardViewModel: Identifiable, ObservableObject {
         return OnboardingInput(
             steps: .twins(TwinsOnboardingStep.twinningSteps),
             cardInput: .cardModel(self),
-            welcomeStep: nil,
             twinData: cardInfo.walletData.twinData,
             currentStepIndex: 0,
             isStandalone: true
@@ -793,3 +790,5 @@ extension CardViewModel {
         case loaded
     }
 }
+
+extension CardViewModel: WalletConnectUserWalletInfoProvider {}

@@ -16,22 +16,13 @@ class CommonWalletConnectService {
 
 extension CommonWalletConnectService: WalletConnectService {
     var canEstablishNewSessionPublisher: AnyPublisher<Bool, Never> {
-        guard let v1Service = v1Service else {
-            return Just(false).eraseToAnyPublisher()
+        Publishers.CombineLatest(
+            v1Service?.canEstablishNewSessionPublisher.eraseToAnyPublisher() ?? Just(false).eraseToAnyPublisher(),
+            v2Service?.canEstablishNewSessionPublisher.eraseToAnyPublisher() ?? Just(true).eraseToAnyPublisher()
+        ).map { v1Can, v2Can in
+            v1Can && v2Can
         }
-
-        if let v2Service = v2Service {
-            return Publishers.CombineLatest(
-                v1Service.canEstablishNewSessionPublisher,
-                v2Service.canEstablishNewSessionPublisher
-            ).map { v1Can, v2Can in
-                v1Can && v2Can
-            }
-            .eraseToAnyPublisher()
-        }
-
-        return v1Service.canEstablishNewSessionPublisher
-            .eraseToAnyPublisher()
+        .eraseToAnyPublisher()
     }
 
     var sessionsPublisher: AnyPublisher<[WalletConnectSession], Never> {
@@ -81,10 +72,6 @@ extension CommonWalletConnectService: WalletConnectService {
         return service(for: url) != nil
     }
 
-    func handle(url: URL) -> Bool {
-        return handle(url: url.absoluteString)
-    }
-
     func handle(url: String) -> Bool {
         guard let service = service(for: url) else {
             return false
@@ -93,12 +80,12 @@ extension CommonWalletConnectService: WalletConnectService {
         return service.handle(url: url)
     }
 
-    private func service(for link: String) -> WalletConnectURLHandler? {
-        if v2Service?.canHandle(url: link) ?? false {
+    private func service(for url: String) -> URLHandler? {
+        if v2Service?.canHandle(url: url) ?? false {
             return v2Service
         }
 
-        if v1Service?.canHandle(url: link) ?? false {
+        if v1Service?.canHandle(url: url) ?? false {
             return v1Service
         }
 

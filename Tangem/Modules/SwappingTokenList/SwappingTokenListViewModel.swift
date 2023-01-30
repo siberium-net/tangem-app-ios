@@ -40,23 +40,19 @@ final class SwappingTokenListViewModel: ObservableObject, Identifiable {
 
     init(
         sourceCurrency: Currency,
-        userCurrencies: [Currency],
+        userCurrenciesProvider: UserCurrenciesProviding,
         tokenIconURLBuilder: TokenIconURLBuilding,
         currencyMapper: CurrencyMapping,
         coordinator: SwappingTokenListRoutable
     ) {
         self.sourceCurrency = sourceCurrency
-        self.userCurrencies = userCurrencies
+        userCurrencies = userCurrenciesProvider.getCurrencies(blockchain: sourceCurrency.blockchain)
         self.tokenIconURLBuilder = tokenIconURLBuilder
         self.currencyMapper = currencyMapper
         self.coordinator = coordinator
 
         setupUserItemsSection()
         bind()
-    }
-
-    func onAppear() {
-        dataLoader.fetch(searchText.value)
     }
 
     func fetch() {
@@ -77,7 +73,7 @@ private extension SwappingTokenListViewModel {
             .debounce(for: 0.5, scheduler: DispatchQueue.main)
             .removeDuplicates()
             .sink { [weak self] string in
-                self?.dataLoader.fetch(string)
+                self?.dataLoader.reset(string)
             }
             .store(in: &bag)
     }
@@ -109,6 +105,7 @@ private extension SwappingTokenListViewModel {
 
     func mapToSwappingTokenItemViewModel(currency: Currency) -> SwappingTokenItemViewModel {
         SwappingTokenItemViewModel(
+            id: currency.id,
             iconURL: tokenIconURLBuilder.iconURL(id: currency.id, size: .large),
             name: currency.name,
             symbol: currency.symbol,

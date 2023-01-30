@@ -47,8 +47,6 @@ final class UserWalletListViewModel: ObservableObject, Identifiable {
         selectedUserWalletId = userWalletRepository.selectedUserWalletId
         updateModels()
 
-        userWalletRepository.delegate = self
-
         bind()
     }
 
@@ -87,7 +85,7 @@ final class UserWalletListViewModel: ObservableObject, Identifiable {
     }
 
     func addUserWallet() {
-        Analytics.log(.buttonScanNewCard)
+        Analytics.beginLoggingCardScan(source: .myWallets)
 
         userWalletRepository.add { [weak self] result in
             guard
@@ -280,7 +278,7 @@ final class UserWalletListViewModel: ObservableObject, Identifiable {
             isMultiWallet: config.hasFeature(.multiCurrency),
             isUserWalletLocked: userWallet.isLocked,
             isSelected: selectedUserWalletId == userWallet.userWalletId,
-            totalBalanceProvider: totalBalanceProvider ?? TotalBalanceProvider(userWalletModel: userWalletModel, userWalletAmountType: nil, totalBalanceAnalyticsService: nil),
+            totalBalanceProvider: totalBalanceProvider ?? TotalBalanceProvider(userWalletModel: userWalletModel, userWalletAmountType: config.cardAmountType, totalBalanceAnalyticsService: nil),
             cardImageProvider: CardImageProvider()
         ) { [weak self] in
             if userWallet.isLocked {
@@ -292,11 +290,5 @@ final class UserWalletListViewModel: ObservableObject, Identifiable {
         } didDeleteUserWallet: { [weak self] in
             self?.showDeletionConfirmation(userWallet)
         }
-    }
-}
-
-extension UserWalletListViewModel: UserWalletRepositoryDelegate {
-    func showTOS(at url: URL, _ completion: @escaping (Bool) -> Void) {
-        coordinator.openDisclaimer(at: url, completion)
     }
 }

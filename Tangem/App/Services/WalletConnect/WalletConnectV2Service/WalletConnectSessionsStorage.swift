@@ -31,7 +31,7 @@ extension InjectedValues {
     }
 }
 
-actor CommonWalletConnectSessionsStorage: ObservableObject {
+actor CommonWalletConnectSessionsStorage {
     @Injected(\.persistentStorage) private var storage: PersistentStorageProtocol
 
     var sessions: AsyncStream<[WalletConnectSavedSession]> {

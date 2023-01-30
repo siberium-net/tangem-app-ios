@@ -31,6 +31,11 @@ class OnboardingCoordinator: CoordinatorObject {
     @Published var addressQrBottomSheetContentViewModel: AddressQrBottomSheetContentViewModel? = nil
     @Published var supportChatViewModel: SupportChatViewModel? = nil
 
+    // MARK: - Navigation bar state
+
+    // We should update navigationBar visibility state for the main module on iOS13
+    var navigationBarHidden: Bool { mainCoordinator == nil }
+
     // For non-dismissable presentation
     var onDismissalAttempt: () -> Void = {}
 
@@ -129,6 +134,7 @@ extension OnboardingCoordinator: WalletOnboardingRoutable {
     }
 
     func openSupportChat(cardId: String, dataCollector: EmailDataCollector) {
+        Analytics.log(.chatScreenOpened)
         supportChatViewModel = SupportChatViewModel(cardId: cardId, dataCollector: dataCollector)
     }
 }

@@ -26,6 +26,7 @@ struct MainView: View {
                             width: geometry.size.width - 32,
                             cardSetLabel: viewModel.cardsCountLabel
                         )
+                        .padding(.top, 8)
                         .fixedSize(horizontal: false, vertical: true)
 
                         if viewModel.isLackDerivationWarningViewVisible {
@@ -58,7 +59,7 @@ struct MainView: View {
                 }
             }
         }
-        .navigationBarBackButtonHidden(true)
+        .navigationBarBackButtonHidden(true) // Remove default back button. Because we don't have back transition. Has no effect on iOS13.
         .navigationBarTitle(Text(Localization.walletTitle), displayMode: .inline)
         .navigationBarItems(
             leading: leadingNavigationButtons,
@@ -68,7 +69,6 @@ struct MainView: View {
         .onAppear {
             viewModel.onAppear()
         }
-        .navigationBarHidden(false)
         .ignoresKeyboard()
         .alert(item: $viewModel.error) { $0.alert }
     }
@@ -86,7 +86,7 @@ struct MainView: View {
         Button(
             action: viewModel.didTapUserWalletListButton,
             label: {
-                Assets.wallets
+                Assets.wallets.image
                     .foregroundColor(Color.black)
                     .frame(width: 44, height: 44)
                     .offset(x: -11, y: 0)
@@ -100,7 +100,7 @@ struct MainView: View {
         Button(
             action: viewModel.onScan,
             label: {
-                Assets.scanWithPhone
+                Assets.scanWithPhone.image
                     .foregroundColor(Color.black)
                     .frame(width: 44, height: 44)
                     .offset(x: -14, y: 0)
@@ -112,7 +112,7 @@ struct MainView: View {
 
     var settingsNavigationButton: some View {
         Button(action: viewModel.openSettings) {
-            Image("verticalDots")
+            Assets.verticalDots.image
                 .foregroundColor(Color.tangemGrayDark6)
                 .frame(width: 44, height: 44)
                 .offset(x: 11)
@@ -200,6 +200,7 @@ struct MainView: View {
                 }
             }
             .padding(.horizontal, 16)
+            .padding(.bottom, 8)
         }
     }
 }

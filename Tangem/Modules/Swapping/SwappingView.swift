@@ -65,11 +65,11 @@ struct SwappingView: View {
     @ViewBuilder
     private var swappingButton: some View {
         Group {
-            if viewModel.isLoading {
+            if viewModel.swapButtonIsLoading {
                 ProgressViewCompat(color: Colors.Icon.informative)
             } else {
                 Button(action: viewModel.userDidTapSwapExchangeItemsButton) {
-                    Assets.swappingIcon
+                    Assets.swappingIcon.image
                         .resizable()
                         .frame(width: 20, height: 20)
                 }
@@ -128,9 +128,13 @@ struct SwappingView_Preview: PreviewProvider {
     static let viewModel = SwappingViewModel(
         exchangeManager: ExchangeManagerMock(),
         swappingDestinationService: SwappingDestinationServiceMock(),
-        userCurrenciesProvider: UserCurrenciesProviderMock(),
         tokenIconURLBuilder: TokenIconURLBuilderMock(),
         transactionSender: TransactionSenderMock(),
+        fiatRatesProvider: FiatRatesProviderMock(),
+        userWalletModel: UserWalletModelMock(),
+        currencyMapper: CurrencyMapper(),
+        blockchainNetwork: PreviewCard.ethereum.blockchainNetwork!,
+
         coordinator: SwappingCoordinator()
     )
 

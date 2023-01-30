@@ -102,7 +102,7 @@ extension DefaultExchangeManager: ExchangeManager {
 
     func refresh() {
         tokenExchangeAllowanceLimit = nil
-        refreshValues(silent: false)
+        refreshValues()
     }
 
     func didSendApprovingTransaction(exchangeTxData: ExchangeTransactionDataModel) {
@@ -125,7 +125,7 @@ private extension DefaultExchangeManager {
         }
 
         restartTimer()
-        refreshValues(silent: false)
+        refreshValues()
     }
 
     func exchangeItemsDidChange() {
@@ -138,7 +138,7 @@ private extension DefaultExchangeManager {
         }
 
         restartTimer()
-        refreshValues(silent: false)
+        refreshValues()
     }
 }
 
@@ -170,7 +170,7 @@ private extension DefaultExchangeManager {
 
                 let timeElapsed = (date.timeIntervalSince1970 - timeStarted).rounded()
                 if Int(timeElapsed) % 10 == 0 {
-                    self?.refreshValues(silent: false)
+                    self?.refreshValues(loadingType: .autoupdate)
                 }
             }
     }
@@ -186,10 +186,8 @@ private extension DefaultExchangeManager {
 // MARK: - Requests
 
 private extension DefaultExchangeManager {
-    func refreshValues(silent: Bool) {
-        if !silent {
-            updateState(.loading)
-        }
+    func refreshValues(loadingType: ExchangeAvailabilityLoadingType = .full) {
+        updateState(.loading(loadingType))
 
         Task {
             do {
@@ -237,7 +235,7 @@ private extension DefaultExchangeManager {
             if isEnoughAllowance() {
                 /// If we get enough allowance
                 pendingTransactions[exchangeItems.source] = nil
-                refreshValues(silent: false)
+                refreshValues()
             } else {
                 updateState(.preview(preview))
             }
@@ -305,17 +303,17 @@ private extension DefaultExchangeManager {
         Task {
             let source = exchangeItems.source
             let balance = try await blockchainDataProvider.getBalance(for: source)
-            var fiatBalance: Decimal = 0
-            if let amount = amount {
-                fiatBalance = try await blockchainDataProvider.getFiat(for: source, amount: amount)
-            }
 
             if let destination = exchangeItems.destination {
                 let balance = try await blockchainDataProvider.getBalance(for: destination)
-                exchangeItems.destinationBalance = balance
+                if exchangeItems.destinationBalance != balance {
+                    exchangeItems.destinationBalance = balance
+                }
             }
 
-            exchangeItems.sourceBalance = ExchangeItems.Balance(balance: balance, fiatBalance: fiatBalance)
+            if exchangeItems.sourceBalance != balance {
+                exchangeItems.sourceBalance = balance
+            }
         }
     }
 }
@@ -330,13 +328,11 @@ private extension DefaultExchangeManager {
 
         let paymentAmount = exchangeItems.source.convertFromWEI(value: quoteData.fromTokenAmount)
         let expectedAmount = destination.convertFromWEI(value: quoteData.toTokenAmount)
-        let expectedFiatAmount = try await blockchainDataProvider.getFiat(for: destination, amount: expectedAmount)
         let hasPendingTransaction = try await hasPendingApprovingTransaction()
-        let isEnoughAmountForExchange = exchangeItems.sourceBalance.balance >= paymentAmount
+        let isEnoughAmountForExchange = exchangeItems.sourceBalance >= paymentAmount
 
         return PreviewSwappingDataModel(
             expectedAmount: expectedAmount,
-            expectedFiatAmount: expectedFiatAmount,
             isPermissionRequired: !isEnoughAllowance(),
             hasPendingTransaction: hasPendingTransaction,
             isEnoughAmountForExchange: isEnoughAmountForExchange
@@ -352,10 +348,8 @@ private extension DefaultExchangeManager {
         }
 
         let source = exchangeItems.source
-        let sourceBalance = exchangeItems.sourceBalance.balance
+        let sourceBalance = exchangeItems.sourceBalance
         let fee = transaction.fee
-
-        let fiatFee = try await blockchainDataProvider.getFiat(for: source.blockchain, amount: transaction.fee)
 
         let isEnoughAmountForFee: Bool
         var paymentAmount = amount
@@ -372,9 +366,7 @@ private extension DefaultExchangeManager {
 
         return SwappingResultDataModel(
             amount: preview.expectedAmount,
-            fiatAmount: preview.expectedFiatAmount,
             fee: fee,
-            fiatFee: fiatFee,
             isEnoughAmountForExchange: isEnoughAmountForExchange,
             isEnoughAmountForFee: isEnoughAmountForFee,
             isPermissionRequired: !isEnoughAllowance()

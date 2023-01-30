@@ -5,6 +5,7 @@
 //  Created by Alexander Osokin on 25.02.2021.
 //  Copyright © 2021 Tangem AG. All rights reserved.
 //
+
 import SwiftUI
 import BlockchainSdk
 import Combine
@@ -447,6 +448,7 @@ extension TokenDetailsViewModel {
 
     func openSellCrypto() {
         Analytics.log(.buttonSell)
+
         if let disabledLocalizedReason = card.getDisabledLocalizedReason(for: .exchange) {
             alert = AlertBuilder.makeDemoAlert(disabledLocalizedReason)
             return
@@ -508,16 +510,19 @@ extension TokenDetailsViewModel {
 
     func openSwapping() {
         guard FeatureProvider.isAvailable(.exchange),
+              let userWalletModel = card.userWalletModel,
               let walletModel = walletModel,
               let source = sourceCurrency
         else {
             return
         }
 
-        let input = SwappingConfigurator.InputModel(
+        let input = CommonSwappingModulesFactory.InputModel(
+            userWalletModel: userWalletModel,
             walletModel: walletModel,
             sender: walletModel.walletManager,
             signer: card.signer,
+            logger: AppLog.shared,
             source: source
         )
 
@@ -583,7 +588,7 @@ extension TokenDetailsViewModel {
             }
         }
 
-        var icon: Image {
+        var icon: ImageType {
             switch self {
             case .buy:
                 return Assets.arrowUpMini

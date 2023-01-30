@@ -21,8 +21,6 @@ class CommonUserWalletRepository: UserWalletRepository {
     @Injected(\.supportChatService) private var supportChatService: SupportChatServiceProtocol
     @Injected(\.failedScanTracker) var failedCardScanTracker: FailedScanTrackable
 
-    weak var delegate: UserWalletRepositoryDelegate?
-
     var selectedModel: CardViewModel? {
         return models.first {
             $0.userWallet?.userWalletId == selectedUserWalletId
@@ -126,8 +124,9 @@ class CommonUserWalletRepository: UserWalletRepository {
         .flatMap { [weak self] cardModel -> AnyPublisher<UserWalletRepositoryResult?, Error> in
             self?.failedCardScanTracker.resetCounter()
 
-            Analytics.log(.cardWasScanned)
+            Analytics.endLoggingCardScan()
 
+            self?.sendEvent(.scan(isScanning: false))
             let onboardingInput = cardModel.onboardingInput
             if onboardingInput.steps.needOnboarding {
                 cardModel.userWalletModel?.updateAndReloadWalletModels()
@@ -149,6 +148,7 @@ class CommonUserWalletRepository: UserWalletRepository {
             AppLog.shared.error(error)
 
             self.failedCardScanTracker.recordFailure()
+            self.sendEvent(.scan(isScanning: false))
 
             if error is SaltPayRegistratorError {
                 return Just(UserWalletRepositoryResult.error(error))
@@ -184,7 +184,6 @@ class CommonUserWalletRepository: UserWalletRepository {
 
         sendEvent(.scan(isScanning: true))
         sdkProvider.sdk.startSession(with: AppScanTask()) { [unowned self] result in
-            self.sendEvent(.scan(isScanning: false))
 
             sdkProvider.setup(with: oldConfig)
 
@@ -196,7 +195,7 @@ class CommonUserWalletRepository: UserWalletRepository {
                 let cardDTO = CardDTO(card: response.card)
                 Analytics.logScan(card: cardDTO)
                 didScan(card: cardDTO, walletData: response.walletData)
-                self.acceptTOSIfNeeded(response.getCardInfo(), completion)
+                completion(.success(self.processScan(response.getCardInfo())))
             }
         }
     }
@@ -401,24 +400,6 @@ class CommonUserWalletRepository: UserWalletRepository {
         encryptionKeyByUserWalletId = [:]
         models = []
         userWallets = savedUserWallets(withSensitiveData: false)
-    }
-
-    private func acceptTOSIfNeeded(_ cardInfo: CardInfo, _ completion: @escaping (Result<CardViewModel, Error>) -> Void) {
-        let tou = UserWalletConfigFactory(cardInfo).makeConfig().tou
-
-        guard let delegate, !AppSettings.shared.termsOfServicesAccepted.contains(tou.id) else {
-            completion(.success(processScan(cardInfo)))
-            return
-        }
-
-        delegate.showTOS(at: tou.url) { accepted in
-            if accepted {
-                AppSettings.shared.termsOfServicesAccepted.insert(tou.id)
-                completion(.success(self.processScan(cardInfo)))
-            } else {
-                completion(.failure(TangemSdkError.userCancelled))
-            }
-        }
     }
 
     // TODO: refactor
