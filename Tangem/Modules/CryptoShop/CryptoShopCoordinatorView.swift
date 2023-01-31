@@ -8,19 +8,19 @@
 
 import SwiftUI
 
-struct CryptoShopCoordinatorView: CoordinatorView {
+struct CryptoShopCoordinatorView<RootView: View>: CoordinatorView {
+    private let rootView: RootView
     @ObservedObject var coordinator: CryptoShopCoordinator
 
-    init(coordinator: CryptoShopCoordinator) {
+    init(rootView: RootView, coordinator: CryptoShopCoordinator) {
+        self.rootView = rootView
         self.coordinator = coordinator
     }
 
     var body: some View {
         ZStack {
-            if let warningRussiaBankCardViewModel = coordinator.warningRussiaBankCardViewModel {
-                WarningRussiaBankCardView(viewModel: warningRussiaBankCardViewModel)
-                    .navigationLinks(links)
-            }
+            rootView
+                .navigationLinks(links)
 
             sheets
         }
@@ -33,13 +33,12 @@ struct CryptoShopCoordinatorView: CoordinatorView {
 
     @ViewBuilder
     private var sheets: some View {
-        EmptyView()
-//        NavHolder()
-//            .bottomSheet(
-//                item: $coordinator.warningRussiaBankCardViewModel,
-//                viewModelSettings: .warning
-//            ) {
-//                WarningRussiaBankCardView(viewModel: $0)
-//            }
+        NavHolder()
+            .bottomSheet(
+                item: $coordinator.warningRussiaBankCardViewModel,
+                viewModelSettings: .warning
+            ) {
+                WarningRussiaBankCardView(viewModel: $0)
+            }
     }
 }

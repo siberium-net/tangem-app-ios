@@ -19,6 +19,10 @@ struct TokenDetailsCoordinatorView: CoordinatorView {
                     .navigationLinks(links)
             }
 
+            if let coordinator = coordinator.cryptoShopCoordinator {
+                CryptoShopCoordinatorView(rootView: self, coordinator: coordinator)
+            }
+
             sheets
         }
     }
@@ -62,12 +66,12 @@ struct TokenDetailsCoordinatorView: CoordinatorView {
                 WarningRussiaBankCardCoordinatorView(coordinator: $0)
             }
 
-        NavHolder()
-            .bottomSheet(
-                item: $coordinator.cryptoShopCoordinator,
-                viewModelSettings: .warning
-            ) {
-                CryptoShopCoordinatorView(coordinator: $0)
-            }
+//        NavHolder()
+//            .bottomSheet(
+//                item: $coordinator.cryptoShopCoordinator,
+//                viewModelSettings: .warning
+//            ) {
+//
+//            }
     }
 }
