@@ -140,7 +140,7 @@ private extension ListDataLoader {
             .map { models in
                 var models = models
                 models.insert(CoinModel(id: "ravencoin", name: "Ravencoin", symbol: "RVN", imageURL: nil, items: [
-                    .blockchain(Blockchain.ravencoin(testnet: false))
+                    .blockchain(Blockchain.ravencoin(testnet: false)),
                 ]), at: 0)
                 return models
             }
