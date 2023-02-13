@@ -486,12 +486,17 @@ extension TokenDetailsViewModel {
 
     func openBuyCryptoIfPossible() {
         Analytics.log(.buttonBuy)
+        openBuyCrypto()
 
-        if tangemApiService.geoIpRegionCode == LanguageCode.ru {
-            coordinator.openBankWarning()
-        } else {
-            openBuyCrypto()
-        }
+//        if tangemApiService.geoIpRegionCode == LanguageCode.ru {
+//            coordinator.openBankWarning {
+//                self.openBuyCrypto()
+//            } declineCallback: {
+//                self.coordinator.openP2PTutorial()
+//            }
+//        } else {
+//            openBuyCrypto()
+//        }
     }
 
     func openPushTx(for index: Int) {

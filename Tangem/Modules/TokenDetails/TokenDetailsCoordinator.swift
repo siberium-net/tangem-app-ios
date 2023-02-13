@@ -24,8 +24,7 @@ class TokenDetailsCoordinator: CoordinatorObject, CryptoShopRoutable {
     @Published var sendCoordinator: SendCoordinator? = nil
     @Published var pushTxCoordinator: PushTxCoordinator? = nil
     @Published var swappingCoordinator: SwappingCoordinator? = nil
-    @Published var warningRussiaBankCardCoordinator: WarningRussiaBankCardCoordinator? = nil
-    @Published var cryptoShopCoordinator: CryptoShopCoordinator? = nil
+    @Published var buyingCoordinator: BuyingCoordinator? = .init()
 
     // MARK: - Child view models
 
@@ -58,17 +57,15 @@ extension TokenDetailsCoordinator {
 extension TokenDetailsCoordinator: TokenDetailsRoutable {
     func openBuyCrypto(at url: URL, closeUrl: String, action: @escaping (String) -> Void) {
         Analytics.log(.topUpScreenOpened)
-        pushedWebViewModel = WebViewContainerViewModel(
+        let options = BuyingCoordinator.Options(
             url: url,
-            title: Localization.walletButtonBuy,
-            addLoadingIndicator: true,
-            urlActions: [
-                closeUrl: { [weak self] response in
-                    self?.pushedWebViewModel = nil
-                    action(response)
-                },
-            ]
+            closeUrl: closeUrl,
+            action: action,
+            languageCode: "en",
+            presentMode: .push
         )
+
+        buyingCoordinator?.start(with: options)
     }
 
     func openSellCrypto(at url: URL, sellRequestUrl: String, action: @escaping (String) -> Void) {

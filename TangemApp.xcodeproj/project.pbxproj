@@ -753,6 +753,7 @@
 		EFF034B128B6523F00F70FF7 /* CommonWalletListManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFF034B028B6523F00F70FF7 /* CommonWalletListManager.swift */; };
 		EFF253B3293DCAA900AEF302 /* SwappingFeeRowViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFF253B1293DCAA900AEF302 /* SwappingFeeRowViewModel.swift */; };
 		EFF253B4293DCAAA00AEF302 /* SwappingFeeRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFF253B2293DCAA900AEF302 /* SwappingFeeRowView.swift */; };
+		EFF75C0E2998F34200241432 /* DeeperCoordinatorContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFF75C0D2998F34200241432 /* DeeperCoordinatorContainer.swift */; };
 		EFFC860D28BCE87700F863CE /* TokenItemsRepositoryMigrator.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFFC860B28BCE87700F863CE /* TokenItemsRepositoryMigrator.swift */; };
 		EFFC860E28BCE87700F863CE /* LegacyCardMigrator.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFFC860C28BCE87700F863CE /* LegacyCardMigrator.swift */; };
 		EFFC861328BCF6C500F863CE /* StorageEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFFC861228BCF6C500F863CE /* StorageEntry.swift */; };
@@ -1678,6 +1679,7 @@
 		EFF253B1293DCAA900AEF302 /* SwappingFeeRowViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwappingFeeRowViewModel.swift; sourceTree = "<group>"; };
 		EFF253B2293DCAA900AEF302 /* SwappingFeeRowView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwappingFeeRowView.swift; sourceTree = "<group>"; };
 		EFF5CF1928C796B1000EE8DB /* Alpha.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Alpha.xcconfig; sourceTree = "<group>"; };
+		EFF75C0D2998F34200241432 /* DeeperCoordinatorContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeeperCoordinatorContainer.swift; sourceTree = "<group>"; };
 		EFFC860B28BCE87700F863CE /* TokenItemsRepositoryMigrator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TokenItemsRepositoryMigrator.swift; sourceTree = "<group>"; };
 		EFFC860C28BCE87700F863CE /* LegacyCardMigrator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LegacyCardMigrator.swift; sourceTree = "<group>"; };
 		EFFC861228BCF6C500F863CE /* StorageEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageEntry.swift; sourceTree = "<group>"; };
@@ -2800,6 +2802,7 @@
 			isa = PBXGroup;
 			children = (
 				B0BA7BCA26C5684E00D7066F /* AddressQrBottomSheetView.swift */,
+				EFF75C0D2998F34200241432 /* DeeperCoordinatorContainer.swift */,
 			);
 			path = BottomSheets;
 			sourceTree = "<group>";
@@ -3032,8 +3035,7 @@
 			children = (
 				EFBFD56D297998EE00B20C2E /* FiatRatesProvider */,
 				EFEC5F7729703692009C0E5F /* TransactionSendable */,
-				EF6EDD82296C0E8D001B21A3 /* DeeplinkManager */,
-				EF6EDD7B296C0D40001B21A3 /* RemoteRouteManager */,
+				EF6EDD7B296C0D40001B21A3 /* IncomingActionManager */,
 				EF808441293F6B43000D91EA /* TokenIconURLBuilder */,
 				EF4661BE2923B35800346B6C /* Exchange */,
 				EF5903A02909283A00C527C9 /* EnvironmentProvider */,
@@ -3899,15 +3901,6 @@
 				EF6EDD7D296C0D40001B21A3 /* RemoteRouteManaging.swift */,
 			);
 			path = RemoteRouteManager;
-			sourceTree = "<group>";
-		};
-		EF6EDD82296C0E8D001B21A3 /* DeeplinkManager */ = {
-			isa = PBXGroup;
-			children = (
-				EF6EDD83296C0EA9001B21A3 /* DeeplinkParser.swift */,
-				EF6EDD85296C0F21001B21A3 /* DeeplinkParsing.swift */,
-			);
-			path = DeeplinkManager;
 			sourceTree = "<group>";
 		};
 		EF6EDD8A296D6B3B001B21A3 /* SendGroupedNumberTextField */ = {
@@ -4803,6 +4796,7 @@
 				B069F3772631B24F00ACFD19 /* WebImage.swift in Sources */,
 				EFA9854F2947787F00D1FCB3 /* TransactionSenderMock.swift in Sources */,
 				EF9F6F3D28D486B200D6B190 /* Publishers+CombineLatestMany.swift in Sources */,
+				EFF75C0E2998F34200241432 /* DeeperCoordinatorContainer.swift in Sources */,
 				B051A1B0262192A300809FD2 /* WalletConnectModels.swift in Sources */,
 				EF4662362924DFAF00346B6C /* GroupedSection.swift in Sources */,
 				5DFB499C24E6BAF10037E76F /* MessageView.swift in Sources */,

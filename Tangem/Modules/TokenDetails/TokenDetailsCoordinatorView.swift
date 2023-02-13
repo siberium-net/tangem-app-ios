@@ -19,8 +19,8 @@ struct TokenDetailsCoordinatorView: CoordinatorView {
                     .navigationLinks(links)
             }
 
-            if let coordinator = coordinator.cryptoShopCoordinator {
-                CryptoShopCoordinatorView(rootView: self, coordinator: coordinator)
+            if let coordinator = coordinator.buyingCoordinator {
+                BuyingCoordinatorView(coordinator: coordinator, rootView: { self })
             }
 
             sheets
