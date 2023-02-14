@@ -647,6 +647,7 @@ class SendViewModel: ObservableObject {
 
                 return self.walletModel.send(tx, signer: self.cardViewModel.signer)
             }
+            .receive(on: DispatchQueue.main)
             .sink(receiveCompletion: { [weak self] completion in
                 guard let self = self else { return }
 
@@ -657,26 +658,29 @@ class SendViewModel: ObservableObject {
                         return
                     }
 
-                    AppLog.shared.error(error, for: .sendTx, params: [.blockchain: self.walletModel.wallet.blockchain.displayName])
+                    AppLog.shared.error(error: error, params: [
+                        .blockchain: self.walletModel.wallet.blockchain.displayName,
+                        .action: Analytics.ParameterValue.sendTx.rawValue,
+                    ])
                     self.error = SendError(error, openMailAction: self.openMail).alertBinder
                 } else {
                     if !isDemo {
-                        if self.isSellingCrypto {
-                            Analytics.log(.transactionIsSent)
-                            Analytics.log(.userSoldCrypto, params: [.currencyCode: self.blockchainNetwork.blockchain.currencySymbol])
-                        }
-
-                        Analytics.logTx(blockchainName: self.blockchainNetwork.blockchain.displayName, type: self.isSellingCrypto ? .sell : .regular)
-                    }
-
-                    DispatchQueue.main.async {
-                        let alert = AlertBuilder.makeSuccessAlert(
-                            message: isDemo ? Localization.alertDemoFeatureDisabled
-                                : Localization.sendTransactionSuccess,
-                            okAction: self.close
+                        let event: Analytics.Event = self.isSellingCrypto ? .userSoldCrypto : .transactionSent
+                        Analytics.log(
+                            event: event,
+                            params: [
+                                .currencyCode: self.blockchainNetwork.blockchain.currencySymbol,
+                                .blockchain: self.blockchainNetwork.blockchain.displayName,
+                            ]
                         )
-                        self.error = alert
                     }
+
+                    let alert = AlertBuilder.makeSuccessAlert(
+                        message: isDemo ? Localization.alertDemoFeatureDisabled
+                            : Localization.sendTransactionSuccess,
+                        okAction: self.close
+                    )
+                    self.error = alert
                 }
 
             }, receiveValue: { _ in })

@@ -15,6 +15,7 @@ import TangemExchange
 class TokenDetailsViewModel: ObservableObject {
     @Injected(\.exchangeService) private var exchangeService: ExchangeService
     @Injected(\.tangemApiService) private var tangemApiService: TangemApiService
+    @Injected(\.keysManager) private var keysManager: KeysManager
 
     @Published var alert: AlertBinder? = nil
     @Published var showTradeSheet: Bool = false
@@ -31,11 +32,11 @@ class TokenDetailsViewModel: ObservableObject {
 
     var walletModel: WalletModel?
 
-    var incomingTransactions: [PendingTransaction] {
+    var incomingTransactions: [TransactionRecord] {
         walletModel?.incomingPendingTransactions.filter { $0.amountType == amountType } ?? []
     }
 
-    var outgoingTransactions: [PendingTransaction] {
+    var outgoingTransactions: [TransactionRecord] {
         walletModel?.outgoingPendingTransactions.filter { $0.amountType == amountType } ?? []
     }
 
@@ -301,7 +302,7 @@ class TokenDetailsViewModel: ObservableObject {
     func sendAnalyticsEvent(_ event: Analytics.Event) {
         switch event {
         case .userBoughtCrypto:
-            Analytics.log(event, params: [.currencyCode: blockchainNetwork.blockchain.currencySymbol])
+            Analytics.log(event: event, params: [.currencyCode: blockchainNetwork.blockchain.currencySymbol])
         default:
             break
         }
@@ -380,7 +381,7 @@ class TokenDetailsViewModel: ObservableObject {
         }
 
         let currencySymbol = amountType.token?.symbol ?? blockchainNetwork.blockchain.currencySymbol
-        Analytics.log(.buttonRemoveToken, params: [Analytics.ParameterKey.token: currencySymbol])
+        Analytics.log(event: .buttonRemoveToken, params: [Analytics.ParameterKey.token: currencySymbol])
 
         let item = CommonUserWalletModel.RemoveItem(amount: amountType, blockchainNetwork: walletModel.blockchainNetwork)
         card.userWalletModel?.remove(item: item)
@@ -521,12 +522,19 @@ extension TokenDetailsViewModel {
             return
         }
 
+        var referrer: ExchangeReferrerAccount?
+
+        if let account = keysManager.swapReferrerAccount {
+            referrer = ExchangeReferrerAccount(address: account.address, fee: account.fee)
+        }
+
         let input = CommonSwappingModulesFactory.InputModel(
             userWalletModel: userWalletModel,
             walletModel: walletModel,
             sender: walletModel.walletManager,
             signer: card.signer,
             logger: AppLog.shared,
+            referrer: referrer,
             source: source
         )
 

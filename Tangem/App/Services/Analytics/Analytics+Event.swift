@@ -10,8 +10,6 @@ import Foundation
 
 extension Analytics {
     enum Event: String {
-        case cardIsScanned = "card_is_scanned"
-        case transactionIsSent = "transaction_is_sent"
         case transactionIsPushed = "transaction_is_pushed"
         case readyToScan = "ready_to_scan"
         case displayRateAppWarning = "rate_app_warning_displayed"
@@ -56,6 +54,7 @@ extension Analytics {
         case accessCodeEntered = "[Onboarding / Backup] Access Code Entered"
         case accessCodeReEntered = "[Onboarding / Backup] Access Code Re-entered"
         case backupFinished = "[Onboarding / Backup] Backup Finished"
+        case pinScreenOpened = "[Onboarding / Backup] PIN screen opened"
         case activationScreenOpened = "[Onboarding / Top Up] Activation Screen Opened"
         case buttonBuyCrypto = "[Onboarding / Top Up] Button - Buy Crypto"
         case onboardingButtonShowTheWalletAddress = "[Onboarding / Top Up] Button - Show the Wallet Address"
@@ -66,6 +65,7 @@ extension Analytics {
         case twinSetupFinished = "[Onboarding / Twins] Twin Setup Finished"
         case pinCodeSet = "[Onboarding] PIN code set"
         case buttonConnect = "[Onboarding] Button - Connect"
+        case kycStartScreenOpened = "[Onboarding] KYC screen opened"
         case onboardingButtonChat = "[Onboarding] Button - Chat"
         case kycProgressScreenOpened = "[Onboarding] KYC started"
         case kycWaitingScreenOpened = "[Onboarding] KYC in progress"
@@ -82,6 +82,7 @@ extension Analytics {
         case noticeRateTheAppButtonTapped = "[Main Screen] Notice - Rate The App Button Tapped"
         case noticeBackupYourWalletTapped = "[Main Screen] Notice - Backup Your Wallet Tapped"
         case noticeScanYourCardTapped = "[Main Screen] Notice - Scan Your Card Tapped"
+        case buttonBuyMainScreen = "[Main Screen] Button - Buy"
         case buttonManageTokens = "[Portfolio] Button - Manage Tokens"
         case tokenIsTapped = "[Portfolio] Token is Tapped"
         case mainRefreshed = "[Portfolio] Refreshed"
@@ -158,7 +159,7 @@ extension Analytics {
         case swapSendTokenBalanceClicked = "[Swap] Send Token Balance Clicked"
         case swapReceiveTokenClicked = "[Swap] Receive Token Clicked"
         case swapСhooseTokenScreenOpened = "[Swap] Сhoose Token screen opened"
-        case swapSearchTokenClicked = "[Swap] Search Token Clicked"
+        case swapSearchedTokenClicked = "[Swap] Searched Token Clicked"
         case swapButtonSwap = "[Swap] Button -Swap"
         case swapButtonGivePermission = "[Swap] Button - Give permission"
         case swapButtonPermissionApprove = "[Swap] Button - Permission Approve"
