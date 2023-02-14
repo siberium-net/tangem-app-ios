@@ -37,8 +37,8 @@ PODS:
     - ScaleCodec
     - Sodium
     - Solana.Swift
-    - stellar-ios-mac-sdk
-    - SwiftCBOR
+    - stellar-ios-mac-sdk (= 2.2.5)
+    - SwiftCBOR (= 0.4.5)
     - SwiftyJSON
     - TangemSdk
     - web3swift
@@ -176,8 +176,8 @@ PODS:
     - Starscream (~> 4.0.0)
     - TweetNacl (~> 1.0.2)
   - Starscream (4.0.4)
-  - stellar-ios-mac-sdk (2.3.1)
-  - SwiftCBOR (0.4.6)
+  - stellar-ios-mac-sdk (2.2.5)
+  - SwiftCBOR (0.4.5)
   - SwiftDate (6.3.1)
   - SwiftProtobuf (1.19.0)
   - SwiftyJSON (5.0.1)
@@ -344,7 +344,7 @@ CHECKOUT OPTIONS:
     :git: https://github.com/tangem/bitcoincore.git
     :tag: 0.0.16
   BlockchainSdk:
-    :commit: 4dbc93cfe285c5ce35d8e3efe9b643cbf954809b
+    :commit: 08ba6fdad13d3dc1c3d699b623f04fd03ebfb5bb
     :git: https://github.com/tangem/blockchain-sdk-swift.git
   HDWalletKit:
     :git: https://github.com/tangem/hdwallet.git
@@ -378,7 +378,7 @@ SPEC CHECKSUMS:
   BigInt: f668a80089607f521586bbe29513d708491ef2f7
   BinanceChain: b77d4c0e496efbf13bdb1f428621480fd52f4ba1
   BitcoinCore.swift: 64ac4e69d9a6ef917bcbb0c23f1324cf57a822fb
-  BlockchainSdk: 9226bd88d7949e7f9da294020417d4d9fc63b9da
+  BlockchainSdk: 4e43124d8089a0d635a6528159488acc98ac124c
   CryptoSwift: c4f2debceb38bf44c80659afe009f71e23e4a082
   DeviceGuru: 0362f13097207ca1fe246e92df2ba1d3978b2293
   Firebase: 7e8fe528c161b9271d365217a74c16aaf834578e
@@ -403,8 +403,8 @@ SPEC CHECKSUMS:
   Sodium: 23d11554ecd556196d313cf6130d406dfe7ac6da
   Solana.Swift: 81d52fee263fded11b0d4e7859863ae489fe753e
   Starscream: 5178aed56b316f13fa3bc55694e583d35dd414d9
-  stellar-ios-mac-sdk: 119c56099ffb2a82ab4cf4eb09b54a7f05610cc6
-  SwiftCBOR: 7ccf87a679e1981d3232b171a462b8863a6cb12e
+  stellar-ios-mac-sdk: a6199f37910fc6481d17f317c11ccd3fdac542a1
+  SwiftCBOR: ac340b74d3b2cf1f8884bb748bd09875848e3873
   SwiftDate: 72d28954e8e1c6c1c0f917ccc8005e4f83c7d4b2
   SwiftProtobuf: 6ef3f0e422ef90d6605ca20b21a94f6c1324d6b3
   SwiftyJSON: 2f33a42c6fbc52764d96f13368585094bfd8aa5e
